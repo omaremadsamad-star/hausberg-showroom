@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import Categories from "./components/Categories/Categories";
@@ -8,6 +9,10 @@ import Footer from "./components/Footer/Footer";
 import { products } from "./data/products";
 import { FaAward, FaShieldAlt, FaLeaf } from "react-icons/fa";
 import { LanguageProvider, useLanguage } from "./context/LanguageContext";
+
+import Home from "./pages/Home";
+import ProductDetails from "./pages/ProductDetails";
+import About from "./pages/About";
 
 function MainShowroom() {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -139,7 +144,11 @@ function MainShowroom() {
 export default function App() {
   return (
     <LanguageProvider>
-      <MainShowroom />
+      <Routes>
+        <Route path="/" element={<MainShowroom />} />
+        <Route path="/product/:productId" element={<ProductDetails />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
     </LanguageProvider>
   );
 }
