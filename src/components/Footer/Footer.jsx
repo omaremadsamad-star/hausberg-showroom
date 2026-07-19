@@ -55,10 +55,10 @@ export default function Footer() {
 
   const hoursLabel = 
     lang === "ar" 
-      ? "٩:٠٠ ص – ٩:٠٠ م" 
+      ? "٩:٠٠ ص – ١١:٠٠ م" 
       : lang === "ku" 
-        ? "٩:٠٠ی بەیانی – ٩:٠٠ی شەو" 
-        : "9:00 AM – 9:00 PM";
+        ? "٩:٠٠ی بەیانی – ١١:٠٠ی شەو" 
+        : "9:00 AM – 11:00 PM";
 
   return (
     <footer className="bg-black border-t border-neutral-900 pt-20 pb-10">
@@ -142,7 +142,7 @@ export default function Footer() {
             </li>
             <li className="flex items-center gap-3">
               <FaPhoneAlt className="text-brand shrink-0" size={14} />
-              <span dir="ltr">+964 770 123 4567</span>
+              <span dir="ltr">0750 964 8944</span>
             </li>
             <li className="flex items-center gap-3">
               <FaEnvelope className="text-brand shrink-0" size={14} />
@@ -151,39 +151,18 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Column 4: Hours & Newsletter */}
+        {/* Column 4: Hours */}
         <div>
           <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-white mb-6">
             {t("footerHoursHeader")}
           </h4>
-          <div className="flex items-start gap-3 text-xs md:text-sm text-neutral-400 mb-6">
+          <div className="flex items-start gap-3 text-xs md:text-sm text-neutral-400">
             <FaClock className="text-brand mt-1 shrink-0" size={14} />
             <div className="space-y-1 text-start">
               <p>{t("footerSaturdayThursday")}</p>
               <p className="text-white font-medium">{hoursLabel}</p>
               <p className="text-neutral-500">{t("footerClosedFridays")}</p>
             </div>
-          </div>
-          {/* Mock newsletter */}
-          <div>
-            <label htmlFor="footer-email" className="block text-neutral-400 text-xs font-light mb-2 text-start">
-              {t("footerNewsletterLabel")}
-            </label>
-            <div className="flex border border-neutral-850 hover:border-neutral-700 focus-within:border-brand/70 rounded-lg overflow-hidden bg-neutral-950 p-1">
-              <input
-                id="footer-email"
-                type="email"
-                placeholder={t("footerNewsletterPlaceholder")}
-                disabled
-                className="w-full bg-transparent border-none text-xs text-neutral-300 placeholder-neutral-600 focus:outline-none focus:ring-0 px-2"
-              />
-              <button disabled className="px-3 py-1.5 bg-neutral-900 text-neutral-500 text-[10px] font-bold uppercase tracking-wider rounded-md shrink-0">
-                {t("footerJoinBtn")}
-              </button>
-            </div>
-            <span className="text-[10px] text-neutral-650 mt-1 block text-start">
-              {t("footerInquiryOnly")}
-            </span>
           </div>
         </div>
 

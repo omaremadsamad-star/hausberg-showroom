@@ -74,8 +74,8 @@ export const translations = {
     footerNavHeader: "Quick Navigation",
     footerShowroomHeader: "Authorized Showroom",
     footerHoursHeader: "Showroom Hours",
-    footerSaturdayThursday: "Saturday – Thursday:",
-    footerClosedFridays: "Closed on Fridays",
+    footerSaturdayThursday: "Saturday – Friday:",
+    footerClosedFridays: "Open Daily",
     footerNewsletterLabel: "Dealer newsletter updates:",
     footerNewsletterPlaceholder: "Enter email...",
     footerJoinBtn: "Join",
@@ -84,7 +84,7 @@ export const translations = {
     footerPrivacy: "Privacy Policy",
     footerAgreement: "Distributor Agreement",
     footerImprint: "Imprint",
-    footerAddress: "Elryan Building, Karrada District, Baghdad, Iraq"
+    footerAddress: "Royal Mall, Erbil, Kurdistan"
   },
 
   ar: {
@@ -162,8 +162,8 @@ export const translations = {
     footerNavHeader: "روابط سريعة",
     footerShowroomHeader: "صالة العرض المعتمدة",
     footerHoursHeader: "أوقات العمل",
-    footerSaturdayThursday: "السبت – الخميس:",
-    footerClosedFridays: "مغلق أيام الجمعة",
+    footerSaturdayThursday: "السبت – الجمعة:",
+    footerClosedFridays: "مفتوح يومياً",
     footerNewsletterLabel: "تحديثات الوكلاء البريدية:",
     footerNewsletterPlaceholder: "أدخل بريدك الإلكتروني...",
     footerJoinBtn: "انضمام",
@@ -172,7 +172,7 @@ export const translations = {
     footerPrivacy: "سياسة الخصوصية",
     footerAgreement: "اتفاقية الموزعين",
     footerImprint: "معلومات الشركة",
-    footerAddress: "بناية الريان، منطقة الكرادة، بغداد، العراق"
+    footerAddress: "رويال مول، أربيل، كوردستان"
   },
 
   ku: {
@@ -250,8 +250,8 @@ export const translations = {
     footerNavHeader: "گەڕانی خێرا",
     footerShowroomHeader: "پێشانگای فەرمی",
     footerHoursHeader: "کاتەکانی کارکردن",
-    footerSaturdayThursday: "شەممە – پێنجشەممە:",
-    footerClosedFridays: "هەینییەکان داخراوە",
+    footerSaturdayThursday: "شەممە – هەینی:",
+    footerClosedFridays: "ڕۆژانە کراوەیە",
     footerNewsletterLabel: "نامەی نوێی نوێنەران:",
     footerNewsletterPlaceholder: "ئیمەیڵ بنووسە...",
     footerJoinBtn: "بەشداربە",
@@ -260,6 +260,6 @@ export const translations = {
     footerPrivacy: "سیاسەتی تایبەتمەندێتی",
     footerAgreement: "ڕێککەوتنی نوێنەرایەتی",
     footerImprint: "زانیاری یاسایی",
-    footerAddress: "تەلاری ئەلڕەیان، گەڕەکی کەڕادە، بەغداد، عێراق"
+    footerAddress: "ڕۆیاڵ مۆڵ، هەولێر، کوردستان"
   }
 };
