@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { useLanguage } from "../../context/LanguageContext";
 
-export default function ProductCard({ product, onViewDetails }) {
+export default function ProductCard({ product }) {
   const { lang, t } = useLanguage();
   const { name, model, image, price, description } = product;
 
@@ -88,9 +89,9 @@ export default function ProductCard({ product, onViewDetails }) {
         </div>
 
         {/* Action Button */}
-        <button
-          onClick={() => onViewDetails(product)}
-          className="w-full flex items-center justify-center gap-2 py-3 bg-neutral-900 group-hover:bg-brand text-neutral-300 group-hover:text-black font-semibold text-xs rounded-xl tracking-wider uppercase border border-neutral-850 group-hover:border-transparent transition-all duration-300 shadow-md cursor-pointer"
+        <Link
+          to={`/product/${product.id}`}
+          className="w-full flex items-center justify-center gap-2 py-3 bg-neutral-900 group-hover:bg-brand text-neutral-300 group-hover:text-black font-semibold text-xs rounded-xl tracking-wider uppercase border border-neutral-850 group-hover:border-transparent transition-all duration-300 shadow-md cursor-pointer text-center"
         >
           <span>{t("viewDetails")}</span>
           {isRtl ? (
@@ -98,7 +99,7 @@ export default function ProductCard({ product, onViewDetails }) {
           ) : (
             <FaArrowRight className="transform group-hover:translate-x-1 transition-transform duration-300 text-xs" />
           )}
-        </button>
+        </Link>
       </div>
     </div>
   );

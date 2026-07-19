@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { 
   FaFacebookF, 
   FaInstagram, 
@@ -14,6 +15,8 @@ import { useLanguage } from "../../context/LanguageContext";
 export default function Footer() {
   const { t, lang } = useLanguage();
   const isRtl = lang === "ar" || lang === "ku";
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleScrollTo = (id) => {
     const element = document.getElementById(id);
@@ -31,6 +34,25 @@ export default function Footer() {
     }
   };
 
+  const handleNavClick = (path, sectionId) => {
+    if (location.pathname !== path) {
+      navigate(path);
+      if (sectionId) {
+        setTimeout(() => {
+          handleScrollTo(sectionId);
+        }, 150);
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    } else {
+      if (sectionId) {
+        handleScrollTo(sectionId);
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  };
+
   const hoursLabel = 
     lang === "ar" 
       ? "٩:٠٠ ص – ٩:٠٠ م" 
@@ -44,7 +66,7 @@ export default function Footer() {
         
         {/* Column 1: Branding & Intro */}
         <div>
-          <div className="flex items-center gap-2 mb-6 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+          <div className="flex items-center gap-2 mb-6 group cursor-pointer" onClick={() => handleNavClick("/", null)}>
             <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-brand to-brand-light flex items-center justify-center font-extrabold text-black tracking-tight text-xl">
               H
             </div>
@@ -79,27 +101,27 @@ export default function Footer() {
           </h4>
           <ul className="space-y-3.5 text-xs md:text-sm text-neutral-400">
             <li>
-              <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="hover:text-brand transition-colors duration-200 cursor-pointer text-start">
+              <button onClick={() => handleNavClick("/", null)} className="hover:text-brand transition-colors duration-200 cursor-pointer text-start bg-transparent border-none p-0">
                 {t("navHome")}
               </button>
             </li>
             <li>
-              <button onClick={() => handleScrollTo("products-section")} className="hover:text-brand transition-colors duration-200 cursor-pointer text-start">
+              <button onClick={() => handleNavClick("/", "products-section")} className="hover:text-brand transition-colors duration-200 cursor-pointer text-start bg-transparent border-none p-0">
                 {t("navProducts")}
               </button>
             </li>
             <li>
-              <button onClick={() => handleScrollTo("categories-section")} className="hover:text-brand transition-colors duration-200 cursor-pointer text-start">
+              <button onClick={() => handleNavClick("/", "categories-section")} className="hover:text-brand transition-colors duration-200 cursor-pointer text-start bg-transparent border-none p-0">
                 {t("navCategories")}
               </button>
             </li>
             <li>
-              <button onClick={() => handleScrollTo("about-section")} className="hover:text-brand transition-colors duration-200 cursor-pointer text-start">
+              <button onClick={() => handleNavClick("/about", null)} className="hover:text-brand transition-colors duration-200 cursor-pointer text-start bg-transparent border-none p-0">
                 {t("navAbout")}
               </button>
             </li>
             <li>
-              <button onClick={() => handleScrollTo("contact-section")} className="hover:text-brand transition-colors duration-200 cursor-pointer text-start">
+              <button onClick={() => handleNavClick("/", "contact-section")} className="hover:text-brand transition-colors duration-200 cursor-pointer text-start bg-transparent border-none p-0">
                 {t("navContact")}
               </button>
             </li>

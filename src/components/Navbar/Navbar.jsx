@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaGlobe } from "react-icons/fa";
 import { useLanguage } from "../../context/LanguageContext";
 
@@ -8,6 +9,9 @@ export default function Navbar() {
   const [isDesktopDropdownOpen, setIsDesktopDropdownOpen] = useState(false);
   const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
   const { lang, setLang, t } = useLanguage();
+  
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const desktopDropdownRef = useRef(null);
   const mobileDropdownRef = useRef(null);
@@ -63,6 +67,26 @@ export default function Navbar() {
     }
   };
 
+  const handleNavClick = (path, sectionId) => {
+    setIsMobileMenuOpen(false);
+    if (location.pathname !== path) {
+      navigate(path);
+      if (sectionId) {
+        setTimeout(() => {
+          handleScrollTo(sectionId);
+        }, 150);
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    } else {
+      if (sectionId) {
+        handleScrollTo(sectionId);
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  };
+
   const languages = [
     { code: "en", label: "English" },
     { code: "ar", label: "العربية" },
@@ -82,7 +106,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
         {/* LOGO */}
         <div
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          onClick={() => handleNavClick("/", null)}
           className="flex items-center gap-2 cursor-pointer group"
         >
           <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-brand to-brand-light flex items-center justify-center font-extrabold text-black tracking-tight text-xl transform group-hover:scale-105 transition-transform duration-300">
@@ -96,31 +120,31 @@ export default function Navbar() {
         {/* DESKTOP LINKS */}
         <div className="hidden md:flex items-center gap-8">
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            onClick={() => handleNavClick("/", null)}
             className="text-sm font-medium tracking-wide text-neutral-300 hover:text-brand transition-colors duration-200 cursor-pointer"
           >
             {t("navHome")}
           </button>
           <button
-            onClick={() => handleScrollTo("products-section")}
+            onClick={() => handleNavClick("/", "products-section")}
             className="text-sm font-medium tracking-wide text-neutral-300 hover:text-brand transition-colors duration-200 cursor-pointer"
           >
             {t("navProducts")}
           </button>
           <button
-            onClick={() => handleScrollTo("categories-section")}
+            onClick={() => handleNavClick("/", "categories-section")}
             className="text-sm font-medium tracking-wide text-neutral-300 hover:text-brand transition-colors duration-200 cursor-pointer"
           >
             {t("navCategories")}
           </button>
           <button
-            onClick={() => handleScrollTo("about-section")}
+            onClick={() => handleNavClick("/about", null)}
             className="text-sm font-medium tracking-wide text-neutral-300 hover:text-brand transition-colors duration-200 cursor-pointer"
           >
             {t("navAbout")}
           </button>
           <button
-            onClick={() => handleScrollTo("contact-section")}
+            onClick={() => handleNavClick("/", "contact-section")}
             className="text-sm font-medium tracking-wide text-neutral-300 hover:text-brand transition-colors duration-200 cursor-pointer"
           >
             {t("navContact")}
@@ -229,34 +253,31 @@ export default function Navbar() {
         </div>
         <div className="flex flex-col gap-6 px-8 pt-4">
           <button
-            onClick={() => {
-              setIsMobileMenuOpen(false);
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
+            onClick={() => handleNavClick("/", null)}
             className="text-start font-medium text-lg text-neutral-300 hover:text-brand transition-colors duration-200"
           >
             {t("navHome")}
           </button>
           <button
-            onClick={() => handleScrollTo("products-section")}
+            onClick={() => handleNavClick("/", "products-section")}
             className="text-start font-medium text-lg text-neutral-300 hover:text-brand transition-colors duration-200"
           >
             {t("navProducts")}
           </button>
           <button
-            onClick={() => handleScrollTo("categories-section")}
+            onClick={() => handleNavClick("/", "categories-section")}
             className="text-start font-medium text-lg text-neutral-300 hover:text-brand transition-colors duration-200"
           >
             {t("navCategories")}
           </button>
           <button
-            onClick={() => handleScrollTo("about-section")}
+            onClick={() => handleNavClick("/about", null)}
             className="text-start font-medium text-lg text-neutral-300 hover:text-brand transition-colors duration-200"
           >
             {t("navAbout")}
           </button>
           <button
-            onClick={() => handleScrollTo("contact-section")}
+            onClick={() => handleNavClick("/", "contact-section")}
             className="text-start font-medium text-lg text-neutral-300 hover:text-brand transition-colors duration-200"
           >
             {t("navContact")}

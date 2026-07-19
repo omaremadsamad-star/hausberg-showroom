@@ -3,7 +3,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import ProductCard from "../ProductCard/ProductCard";
 import { useLanguage } from "../../context/LanguageContext";
 
-export default function ProductGrid({ products, onViewDetails, activeCategory, onSelectCategory }) {
+export default function ProductGrid({ products, activeCategory, onSelectCategory }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [showOnlyFeatured, setShowOnlyFeatured] = useState(false);
   const { t, lang } = useLanguage();
@@ -113,7 +113,6 @@ export default function ProductGrid({ products, onViewDetails, activeCategory, o
               <ProductCard
                 key={product.id}
                 product={product}
-                onViewDetails={onViewDetails}
               />
             ))}
           </div>
