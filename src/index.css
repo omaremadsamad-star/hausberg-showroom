@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  
+  --color-brand: #d4af37; /* Metallic Gold Accent */
+  --color-brand-light: #f3e5ab;
+  --color-brand-dark: #aa7c11;
+  --color-dark-bg: #07070a;
+  --color-dark-card: #0f0f15;
+  --color-dark-border: #1f1f2e;
+  
+  --animate-fade-in-up: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in: fade-in 0.5s ease-out forwards;
+  
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #07070a;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #07070a;
+  color: #f5f5f7;
+}
+
+/* Custom Scrollbar for premium dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #07070a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f1f2e;
+  border-radius: 9999px;
+  border: 2px solid #07070a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a4e;
+}
+
+/* Clear default #root layout from Vite template to allow full viewport control */
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  min-height: auto;
+  text-align: start;
+  display: block;
+}
+
+/* RTL layout theme overrides */
+:root[dir="rtl"] {
+  --font-sans: "Cairo", "Tahoma", "Segoe UI", sans-serif;
+}
+
+/* Universal selector overrides for RTL direction to force correct Kurdish/Arabic shaping and fonts */
+:root[dir="rtl"] *, :root[dir="rtl"] {
+  font-family: "Cairo", "Tahoma", "Segoe UI", sans-serif !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
+/* Force light weights to regular (400) in RTL to prevent fallback fonts (like Segoe UI Light) from breaking cursive text shaping */
+:root[dir="rtl"] .font-light,
+:root[dir="rtl"] .font-extralight,
+:root[dir="rtl"] .font-thin,
+:root[dir="rtl"] font-light,
+:root[dir="rtl"] font-thin {
+  font-weight: 400 !important;
+}
+
