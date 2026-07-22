@@ -1,16 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { FaArrowLeft, FaArrowRight, FaGlobe, FaTag, FaCheck } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaGlobe, FaTag, FaCheck, FaWhatsapp } from "react-icons/fa";
 import { useLanguage } from "../context/LanguageContext";
-import { products } from "../data/products";
+import { useApp } from "../context/AppContext";
+import { api } from "../services/api";
 
 export default function ProductDetails() {
-  const { productId } = useParams();
+  const { slug } = useParams();
   const { lang, t } = useLanguage();
+  const { settings } = useApp();
+  
+  const [product, setProduct] = useState(null);
+  const [activeImage, setActiveImage] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const isRtl = lang === "ar" || lang === "ku";
 
-  // Find product by ID
-  const product = products.find((p) => p.id === productId);
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        const res = await api.getProduct(slug);
+        setProduct(res.data);
+        setActiveImage(res.data.image);
+        window.scrollTo(0, 0);
+      } catch (err) {
+        console.error("Failed to load product details:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProduct();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#07070a] pt-32 pb-24 flex items-center justify-center">
+        <div className="w-12 h-12 border-2 border-brand/20 border-t-brand rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   if (!product) {
     return (
@@ -23,7 +52,7 @@ export default function ProductDetails() {
             ? "عذراً، لم نتمكن من العثور على المنتج الذي تبحث عنه. قد يكون تم إزالته أو تغيير رابطه." 
             : lang === "ku" 
               ? "ببورە، ناتوانین ئەو بەرهەمە بدۆزینەوە کە بەدوایدا دەگەڕێیت. ڕەنگە لادرابێت یان ناونیشانەکەی گۆڕابێت." 
-              : "We couldn't find the product you're looking for. It may have been removed or the ID is incorrect."}
+              : "We couldn't find the product you're looking for. It may have been removed or the URL is incorrect."}
         </p>
         <Link 
           to="/" 
@@ -36,12 +65,11 @@ export default function ProductDetails() {
     );
   }
 
-  const { name, model, price, image, description, specifications } = product;
+  const { name, model, brand, sku, price, description, specifications = [], gallery_images = [], availability_status, has_active_discount, active_price, discount_percentage } = product;
 
-  // Resolve translations
   const localizedName = name[lang] || name["en"];
   const localizedDesc = description[lang] || description["en"];
-  const localizedCategory = product.categoryTrans[lang] || product.categoryTrans["en"];
+  const localizedCategory = product.categoryTrans?.[lang] || product.categoryTrans?.["en"];
 
   // Price formatter
   const formatPrice = (priceIqd) => {
@@ -65,7 +93,53 @@ export default function ProductDetails() {
     };
   };
 
-  const prices = formatPrice(price);
+  const activePrices = formatPrice(active_price);
+  const originalPrices = formatPrice(price);
+
+  const getAvailabilityBadge = () => {
+    const status = availability_status;
+    const config = {
+      'Available': {
+        text: lang === "ar" ? "✓ متوفر" : lang === "ku" ? "✓ بەردەستە" : "✓ Available",
+        class: "text-emerald-450 border-emerald-500/20 bg-emerald-950/80"
+      },
+      'Coming Soon': {
+        text: lang === "ar" ? "⚠ قريباً" : lang === "ku" ? "⚠ بەم زووانە" : "⚠ Coming Soon",
+        class: "text-amber-450 border-amber-500/20 bg-amber-950/80"
+      },
+      'Out Of Stock': {
+        text: lang === "ar" ? "✖ غير متوفر" : lang === "ku" ? "✖ بەردەست نییە" : "✖ Out Of Stock",
+        class: "text-rose-450 border-rose-500/20 bg-rose-950/80"
+      },
+      'Discontinued': {
+        text: lang === "ar" ? "⛔ متوقف" : lang === "ku" ? "⛔ بەرهەمناهێنرێت" : "⛔ Discontinued",
+        class: "text-neutral-400 border-neutral-700/20 bg-neutral-900/80"
+      }
+    };
+    const badge = config[status] || config['Available'];
+    return (
+      <span className={`text-[10px] font-bold tracking-wider px-3 py-1 rounded-full border backdrop-blur-md ${badge.class}`}>
+        {badge.text}
+      </span>
+    );
+  };
+
+  // Generate WhatsApp prefilled message
+  const getWhatsappLink = () => {
+    const rawNumber = settings?.whatsapp_number || "9647517897977";
+    const cleanNumber = rawNumber.replace(/[^0-9]/g, "");
+    
+    let message = "";
+    if (lang === "ar") {
+      message = `مرحباً هوزبيرغ، أنا مهتم بشراء منتج ${brand} ${model} - ${localizedName}. يرجى تزويدي بتفاصيل التوفر والأسعار. (رمز المنتج SKU: ${sku})`;
+    } else if (lang === "ku") {
+      message = `سڵاو هاوسبێرگ، من ئارەزوومەندم لە کڕینی بەرهەمی ${brand} ${model} - ${localizedName}. تکایە زانیاری لەسەر بەردەستبوون و نرخ پێشکەش بکەن. (کۆدی بەرهەم SKU: ${sku})`;
+    } else {
+      message = `Hello Hausberg, I am interested in purchasing the product ${brand} ${model} - ${localizedName}. Please provide availability and pricing details. (SKU: ${sku})`;
+    }
+
+    return `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
+  };
 
   return (
     <div className="min-h-screen bg-[#07070a] pt-32 pb-24 relative overflow-hidden">
@@ -93,13 +167,13 @@ export default function ProductDetails() {
         {/* Product Layout Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           
-          {/* Left Column: Image Card */}
-          <div className="lg:col-span-6">
+          {/* Left Column: Image Gallery Card */}
+          <div className="lg:col-span-6 space-y-6">
             <div className="relative rounded-3xl border border-neutral-900 overflow-hidden bg-neutral-950/60 shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
               <img
-                src={image}
+                src={activeImage}
                 alt={localizedName}
-                className="w-full h-auto max-h-[500px] object-cover mx-auto"
+                className="w-full h-auto max-h-[500px] object-cover mx-auto transition-all duration-300"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 pointer-events-none" />
               
@@ -110,13 +184,33 @@ export default function ProductDetails() {
                 </span>
               )}
             </div>
+
+            {/* Thumbnail switcher if there are multiple images */}
+            {gallery_images && gallery_images.length > 1 && (
+              <div className="flex flex-wrap gap-3.5 justify-center">
+                {gallery_images.map((img) => {
+                  const isSelected = activeImage === img.path;
+                  return (
+                    <button
+                      key={img.id}
+                      onClick={() => setActiveImage(img.path)}
+                      className={`w-20 h-16 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
+                        isSelected ? "border-brand scale-105" : "border-neutral-900 hover:border-neutral-700/60 opacity-60 hover:opacity-100"
+                      }`}
+                    >
+                      <img src={img.path} alt="Thumbnail" className="w-full h-full object-cover" />
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Right Column: Content Details */}
           <div className="lg:col-span-6 flex flex-col justify-between">
             <div className="space-y-6">
               
-              {/* Category & Model Code */}
+              {/* Category, Model, and Availability */}
               <div className="flex flex-wrap items-center gap-3">
                 <span className="text-[10px] font-bold tracking-widest text-brand border border-brand/35 bg-brand/5 px-3.5 py-1.5 rounded-full uppercase">
                   {model}
@@ -124,6 +218,7 @@ export default function ProductDetails() {
                 <span className="text-[10px] font-medium tracking-wide text-neutral-450 border border-neutral-900 bg-neutral-950 px-3.5 py-1.5 rounded-full">
                   {localizedCategory}
                 </span>
+                {getAvailabilityBadge()}
               </div>
 
               {/* Title */}
@@ -131,14 +226,30 @@ export default function ProductDetails() {
                 {localizedName}
               </h1>
 
-              {/* Price */}
+              {/* Price Details with Active Discount support */}
               <div className="flex flex-wrap items-baseline gap-3.5 py-4 border-t border-b border-neutral-900/60">
-                <span className="text-3xl font-black text-white tracking-wide">
-                  {prices.iqd}
-                </span>
-                <span className="text-sm text-neutral-500 font-light">
-                  ({prices.usd})
-                </span>
+                {has_active_discount ? (
+                  <>
+                    <span className="text-3xl font-black text-white tracking-wide">
+                      {activePrices.iqd}
+                    </span>
+                    <span className="text-sm text-neutral-500 line-through">
+                      {originalPrices.iqd}
+                    </span>
+                    <span className="text-xs font-bold text-black bg-brand px-2.5 py-1 rounded uppercase">
+                      {discount_percentage}% {lang === "ar" ? "خصم" : lang === "ku" ? "داشکاندن" : "OFF"}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-3xl font-black text-white tracking-wide">
+                      {originalPrices.iqd}
+                    </span>
+                    <span className="text-sm text-neutral-500 font-light">
+                      ({originalPrices.usd})
+                    </span>
+                  </>
+                )}
               </div>
 
               {/* Description */}
@@ -146,7 +257,7 @@ export default function ProductDetails() {
                 <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-400">
                   {t("modalOverview")}
                 </h3>
-                <p className="text-neutral-350 text-base font-light leading-relaxed">
+                <p className="text-neutral-350 text-base font-light leading-relaxed whitespace-pre-line">
                   {localizedDesc}
                 </p>
               </div>
@@ -163,7 +274,7 @@ export default function ProductDetails() {
                       const valueText = spec.value[lang] || spec.value["en"];
                       return (
                         <div 
-                          key={index}
+                          key={spec.id || index}
                           className={`grid grid-cols-12 text-sm py-4 px-5 ${
                             index % 2 === 0 ? "bg-neutral-900/5" : "bg-neutral-900/20"
                           } ${
@@ -186,7 +297,7 @@ export default function ProductDetails() {
 
             </div>
 
-            {/* Disclaimer & Action Card */}
+            {/* WhatsApp Call-to-Action Card */}
             <div className="mt-10 p-6 rounded-2xl bg-[#0f0f15]/50 border border-neutral-900 space-y-4">
               <div className="flex items-start gap-3.5 text-xs text-neutral-450 leading-relaxed">
                 <FaGlobe className="text-brand shrink-0 text-base mt-0.5 animate-[spin_10s_linear_infinite]" />
@@ -195,20 +306,19 @@ export default function ProductDetails() {
                 </span>
               </div>
               
-              {/* Optional inquiry button to make it look even more premium */}
               <a 
-                href="https://elryan.com" 
+                href={getWhatsappLink()} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-3.5 bg-neutral-900 hover:bg-brand text-neutral-300 hover:text-black font-semibold text-xs rounded-xl tracking-wider uppercase border border-neutral-850 hover:border-transparent transition-all duration-300 cursor-pointer shadow-md"
+                className="w-full flex items-center justify-center gap-2 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl tracking-wider uppercase transition-all duration-300 cursor-pointer shadow-lg shadow-emerald-950/30 border border-emerald-550/40 hover:-translate-y-0.5"
               >
-                <FaCheck />
+                <FaWhatsapp className="text-base" />
                 <span>
                   {lang === "ar" 
-                    ? "طلب تسعير من الموزع" 
+                    ? "اطلب الآن عبر واتساب" 
                     : lang === "ku" 
-                      ? "داواکردنی نرخ لە بریکار" 
-                      : "Request Dealer Quote"}
+                      ? "داواکردن لە ڕێگەی واتسئەپ" 
+                      : "Order Now via WhatsApp"}
                 </span>
               </a>
             </div>

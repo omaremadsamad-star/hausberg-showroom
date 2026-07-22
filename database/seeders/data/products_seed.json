@@ -1,0 +1,1302 @@
+[
+  {
+    "id": "prod-oven-builtin",
+    "model": "HB-8054NG",
+    "category": "Kitchen Appliances",
+    "categoryTrans": {
+      "en": "Kitchen Appliances",
+      "ar": "أجهزة المطبخ",
+      "ku": "ئامێرەکانی چێشتخانە"
+    },
+    "price": 365000,
+    "image": "https://efabrik.ro/userfiles/848f3076-9cd8-4f43-8b36-8cc89f09854c/products/11753886_big.jpg",
+    "name": {
+      "en": "Premium Built-In Electric Oven",
+      "ar": "فرن كهربائي مدمج فاخر",
+      "ku": "فرنی کارەبایی ناوەکیی نایاب"
+    },
+    "description": {
+      "en": "An elegant built-in electric oven that fits seamlessly into modern kitchen aesthetics. Engineered with advanced convection technology, it delivers uniform heat distribution for perfect roasting and baking results every time.",
+      "ar": "فرن كهربائي مدمج أنيق يتناسب بسلاسة مع جماليات المطبخ الحديثة. تم تصميمه بتقنية الحمل الحراري المتقدمة، ليوفر توزيعاً متساوياً للحرارة للحصول على أفضل نتائج التحمير والخبز في كل مرة.",
+      "ku": "فرنێکی کارەبایی ناوەکیی شیک کە بە شێوەیەکی گونجاو لەگەڵ دیزاینی چێشتخانەی مۆدێرن دەگونجێت. بە تەکنەلۆژیای گواستنەوەی گەرمی پێشکەوتوو دروستکراوە، کە دابەشکردنی گەرمی یەکسان بۆ ئەنجامی برژاندن و نانکردنی بێخەوش لە هەر کاتێکدا دابین دەکات."
+    },
+    "featured": true,
+    "specifications": [
+      {
+        "label": {
+          "en": "Capacity",
+          "ar": "السعة",
+          "ku": "توانای گرتن"
+        },
+        "value": {
+          "en": "71 Liters",
+          "ar": "٧١ لتر",
+          "ku": "٧١ لیتر"
+        }
+      },
+      {
+        "label": {
+          "en": "Power Output",
+          "ar": "قوة التشغيل",
+          "ku": "هێزی دەرچوون"
+        },
+        "value": {
+          "en": "2200W - 2225W",
+          "ar": "٢٢٠٠ واط - ٢٢٢٥ واط",
+          "ku": "٢٢٠٠ وایت - ٢٢٢٥ وایت"
+        }
+      },
+      {
+        "label": {
+          "en": "Energy Efficiency",
+          "ar": "كفاءة الطاقة",
+          "ku": "کارایی وزە"
+        },
+        "value": {
+          "en": "Class A",
+          "ar": "فئة A",
+          "ku": "پۆلی A"
+        }
+      },
+      {
+        "label": {
+          "en": "Cooking Programs",
+          "ar": "برامج الطهي",
+          "ku": "بەرنامەکانی لێنانی خۆراک"
+        },
+        "value": {
+          "en": "7 Functions (incl. Turbo Fan & Grill)",
+          "ar": "٧ وظائف (تشمل مروحة التوربو والشواية)",
+          "ku": "٧ فرمان (لەوانەش پانکەی تۆربۆ و گریڵ)"
+        }
+      },
+      {
+        "label": {
+          "en": "Control Panel",
+          "ar": "لوحة التحكم",
+          "ku": "تەختەی کۆنترۆڵ"
+        },
+        "value": {
+          "en": "Mechanical Knobs with Digital Display",
+          "ar": "مفاتيح ميكانيكية مع شاشة رقمية",
+          "ku": "دوگمەی میکانیکی لەگەڵ شاشەی دیجیتاڵی"
+        }
+      },
+      {
+        "label": {
+          "en": "Material",
+          "ar": "المواد",
+          "ku": "کەرەستە"
+        },
+        "value": {
+          "en": "Black Tempered Glass & Stainless Steel",
+          "ar": "زجاج مقسى أسود وفولاذ مقاوم للصدأ",
+          "ku": "شووشەی ڕەقکراوی ڕەش و ستیلی دژە ژەنگ"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-airfryer-double",
+    "model": "HB-2373NG",
+    "category": "Kitchen Appliances",
+    "categoryTrans": {
+      "en": "Kitchen Appliances",
+      "ar": "أجهزة المطبخ",
+      "ku": "ئامێرەکانی چێشتخانە"
+    },
+    "price": 185000,
+    "image": "https://www.elryan.com/img/600/600/resize/catalog/product/6/8/6805fe4e02e0aa0021c8107a646072-31002.jpg",
+    "name": {
+      "en": "Dual Zone Digital Air Fryer",
+      "ar": "قلاية هوائية رقمية بمنطقتين طهي",
+      "ku": "قلايەی هوایی دیجیتاڵی دوو ناوچەیی"
+    },
+    "description": {
+      "en": "Cook two different dishes simultaneously at independent temperatures and times. Using high-speed 360° air circulation, this air fryer delivers crispy, golden foods with up to 90% less oil.",
+      "ar": "قم بطهي طبقين مختلفين في وقت واحد بدرجات حرارة وأوقات مستقلة. باستخدام تدوير الهواء بسرعة عالية 360 درجة، توفر هذه القلاية أطعمة مقرمشة وذهبية مع زيت أقل بنسبة تصل إلى 90٪.",
+      "ku": "دوو خواردنی جیاواز لە یەک کاتدا بە پلەی گەرمی و کاتی سەربەخۆ لێبنێ. بە بەکارهێنانی سووڕانەوەی هەوای خێرای ٣٦٠ پلە، ئەم قلايەیە خواردنی کرسپی و زێڕین بە ڕێژەی ٩٠٪ کەمتر لە ڕۆن پێشکەش دەکات."
+    },
+    "featured": true,
+    "specifications": [
+      {
+        "label": {
+          "en": "Total Capacity",
+          "ar": "السعة الإجمالية",
+          "ku": "توانای گشتی"
+        },
+        "value": {
+          "en": "8.4 Liters (4.2L per zone)",
+          "ar": "٨.٤ لتر (٤.٢ لتر لكل منطقة)",
+          "ku": "٨.٤ لیتر (٤.٢ لیتر بۆ هەر لایەک)"
+        }
+      },
+      {
+        "label": {
+          "en": "Power",
+          "ar": "القوة",
+          "ku": "هێز"
+        },
+        "value": {
+          "en": "2200W - 2400W",
+          "ar": "٢٢٠٠ واط - ٢٤٠٠ واط",
+          "ku": "٢٢٠٠ وایت - ٢٤٠٠ وایت"
+        }
+      },
+      {
+        "label": {
+          "en": "Presets",
+          "ar": "البرامج المسبقة",
+          "ku": "بەرنامە داڕێژراوەکان"
+        },
+        "value": {
+          "en": "14 Cook Programs",
+          "ar": "١٤ برنامج طهي",
+          "ku": "١٤ بەرنامەی لێنان"
+        }
+      },
+      {
+        "label": {
+          "en": "Temperature Range",
+          "ar": "نطاق الحرارة",
+          "ku": "مەودای پلەی گەرمی"
+        },
+        "value": {
+          "en": "45°C - 200°C",
+          "ar": "٤٥ مئوية - ٢٠٠ مئوية",
+          "ku": "٤٥°C - ٢٠٠°C"
+        }
+      },
+      {
+        "label": {
+          "en": "Display Type",
+          "ar": "نوع الشاشة",
+          "ku": "جۆری شاشە"
+        },
+        "value": {
+          "en": "LED Touch Control Panel",
+          "ar": "لوحة تحكم تعمل باللمس LED",
+          "ku": "تەختەی کۆنترۆڵی دەست لێدانی LED"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-airfryer-classic",
+    "model": "HB-2363IN",
+    "category": "Kitchen Appliances",
+    "categoryTrans": {
+      "en": "Kitchen Appliances",
+      "ar": "أجهزة المطبخ",
+      "ku": "ئامێرەکانی چێشتخانە"
+    },
+    "price": 135000,
+    "image": "https://www.elryan.com/img/600/600/resize/catalog/product/6/7/675aa98f657d0d0020d675f084368hb--90044.jpg",
+    "name": {
+      "en": "Digital Stainless Steel Air Fryer",
+      "ar": "قلاية هوائية رقمية من الفولاذ المقاوم للصدأ",
+      "ku": "قلايەی هوایی دیجیتاڵی لە ستیلی دژە ژەنگ"
+    },
+    "description": {
+      "en": "A compact yet spacious single-basket air fryer boasting a premium stainless steel body. Perfect for families looking to enjoy quick, guilt-free meals with minimal cleanup.",
+      "ar": "قلاية هوائية بسلة واحدة مدمجة وواسعة تتميز بهيكل فاخر من الفولاذ المقاوم للصدأ. مثالية للعائلات التي ترغب في الاستمتاع بوجبات سريعة وصحية مع الحد الأدنى من التنظيف.",
+      "ku": "قلايەیەکی یەک سەبەتەیی بچووک بەڵام فراوان کە خاوەنی جەستەیەکی ستیلی دژە ژەنگی نایابە. گونجاوە بۆ خێزانەکان کە دەیانەوێت چێژ لە خواردنی خێرا و تەندروست وەربگرن بە کەمترین پاککردنەوە."
+    },
+    "featured": false,
+    "specifications": [
+      {
+        "label": {
+          "en": "Capacity",
+          "ar": "السعة",
+          "ku": "توانای گرتن"
+        },
+        "value": {
+          "en": "7.5 Liters",
+          "ar": "٧.٥ لتر",
+          "ku": "٧.٥ لیتر"
+        }
+      },
+      {
+        "label": {
+          "en": "Power",
+          "ar": "القوة",
+          "ku": "هێز"
+        },
+        "value": {
+          "en": "1900W",
+          "ar": "١٩٠٠ واط",
+          "ku": "١٩٠٠ وایت"
+        }
+      },
+      {
+        "label": {
+          "en": "Presets",
+          "ar": "البرامج المسبقة",
+          "ku": "بەرنامە داڕێژراوەکان"
+        },
+        "value": {
+          "en": "12 Cooking Presets",
+          "ar": "١٢ برنامج طهي مسبق",
+          "ku": "١٢ بەرنامەی لێنانی ئامادەکراو"
+        }
+      },
+      {
+        "label": {
+          "en": "Body Material",
+          "ar": "مادة الهيكل",
+          "ku": "کەرەستەی جەستە"
+        },
+        "value": {
+          "en": "Stainless Steel & ABS",
+          "ar": "فولاذ مقاوم للصدأ وبلاستيك ABS",
+          "ku": "ستیلی دژە ژەنگ و ABS"
+        }
+      },
+      {
+        "label": {
+          "en": "Timer",
+          "ar": "المؤقت",
+          "ku": "کاتیار"
+        },
+        "value": {
+          "en": "Up to 60 Minutes",
+          "ar": "حتى ٦٠ دقيقة",
+          "ku": "تا ٦٠ خولەک"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-tea-maker",
+    "model": "HB-3644IN",
+    "category": "Kitchen Appliances",
+    "categoryTrans": {
+      "en": "Kitchen Appliances",
+      "ar": "أجهزة المطبخ",
+      "ku": "ئامێرەکانی چێشتخانە"
+    },
+    "price": 215000,
+    "image": "https://www.elryan.com/img/600/600/resize/catalog/product/6/9/69538561c8491600123f359d75106hb-36-86567_1.jpg",
+    "name": {
+      "en": "Grand Glass Tea Maker & Kettle",
+      "ar": "صانعة الشاي والغلاية الزجاجية الكبرى",
+      "ku": "چایی‌ساز و کتری شووشەیی گەورە"
+    },
+    "description": {
+      "en": "An elegant dual-system glass tea maker designed for brewing traditional teas and boiling water. Features a keep-warm function that maintains tea at the optimal drinking temperature for hours.",
+      "ar": "صانعة شاي زجاجية أنيقة بنظام مزدوج مصممة لتخمير الشاي التقليدي وغلي الماء. تتميز بوظيفة الحفاظ على الدفء التي تحافظ على الشاي في درجة حرارة الشرب المثالية لساعات.",
+      "ku": "کتری و چایی‌سازێکی شووشەیی سیستەمی دووانی شیک کە بۆ لێنانی چای نەریتی و کوڵاندنی ئاو دیزاین کراوە. تایبەتمەندی هێشتنەوەی گەرمی تێدایە کە چایەکە لە پلەی گەرمی گونجاوی خواردنەوەدا بۆ چەندین کاتژمێر دەهێڵێتەوە."
+    },
+    "featured": true,
+    "specifications": [
+      {
+        "label": {
+          "en": "Total Capacity",
+          "ar": "السعة الإجمالية",
+          "ku": "توانای گشتی"
+        },
+        "value": {
+          "en": "3.5 Liters",
+          "ar": "٣.٥ لتر",
+          "ku": "٣.٥ لیتر"
+        }
+      },
+      {
+        "label": {
+          "en": "Power",
+          "ar": "القوة",
+          "ku": "هێز"
+        },
+        "value": {
+          "en": "2200W",
+          "ar": "٢٢٠٠ واط",
+          "ku": "٢٢٠٠ وایت"
+        }
+      },
+      {
+        "label": {
+          "en": "Kettle Body",
+          "ar": "هيكل الغلاية",
+          "ku": "جەستەی کتری"
+        },
+        "value": {
+          "en": "High-Borosilicate Heat Resistant Glass",
+          "ar": "زجاج بوروسيليكات عالي المقاومة للحرارة",
+          "ku": "شووشەی بۆرۆسیلیکاتی بەهێزی بەرگەی گەرمی"
+        }
+      },
+      {
+        "label": {
+          "en": "Filter Type",
+          "ar": "نوع الفلتر",
+          "ku": "جۆری فلتەر"
+        },
+        "value": {
+          "en": "Removable Stainless Steel Infuser",
+          "ar": "مصفاة فولاذية قابلة للإزالة",
+          "ku": "پاڵێوەر ستیلی دژە ژەنگ کە لادەبرێت"
+        }
+      },
+      {
+        "label": {
+          "en": "Functions",
+          "ar": "الوظائف",
+          "ku": "فرمانەکان"
+        },
+        "value": {
+          "en": "Dual Heating (Boil & Keep-Warm)",
+          "ar": "تسخين مزدوج (غلي وحفاظ على الدفء)",
+          "ku": "گەرمکردنی دووانە (کوڵاندن و هێشتنەوەی گەرمی)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-kettle-silver",
+    "model": "HB-3615",
+    "category": "Kitchen Appliances",
+    "categoryTrans": {
+      "en": "Kitchen Appliances",
+      "ar": "أجهزة المطبخ",
+      "ku": "ئامێرەکانی چێشتخانە"
+    },
+    "price": 34000,
+    "image": "https://www.elryan.com/img/600/600/resize/catalog/product/6/7/675aa98f657d0d0020d675f09231730-74328.jpg",
+    "name": {
+      "en": "Stainless Steel Cordless Kettle",
+      "ar": "غلاية لاسلكية من الفولاذ المقاوم للصدأ",
+      "ku": "کتری بێ تەل لە ستیلی دژە ژەنگ"
+    },
+    "description": {
+      "en": "A sleek, rapid-boil cordless kettle featuring high-grade stainless steel construction. Equipped with an ergonomic handle and quick-pour spout for effortless daily coffee and tea preparation.",
+      "ar": "غلاية لاسلكية أنيقة سريعة الغليان تتميز بهيكل من الفولاذ المقاوم للصدأ عالي الجودة. مجهزة بمقبض مريح وفوهة صب سريعة لتحضير القهوة والشاي يومياً دون عناء.",
+      "ku": "کترییەکی بێ تەل شیک و خێرا بۆ کوڵاندنی ئاو کە خاوەنی ستیلی دژە ژەنگی کوالێتی بەرزە. ئامادەکراوە بە دەسکێکی ئەرگونۆمی و دەمی خێرا ڕشتنی ئاو بۆ ئامادەکردنی قاوە و چای ڕۆژانە بە بێ کێشە."
+    },
+    "featured": false,
+    "specifications": [
+      {
+        "label": {
+          "en": "Capacity",
+          "ar": "السعة",
+          "ku": "توانای گرتن"
+        },
+        "value": {
+          "en": "1.8 Liters",
+          "ar": "١.٨ لتر",
+          "ku": "١.٨ لیتر"
+        }
+      },
+      {
+        "label": {
+          "en": "Power",
+          "ar": "القوة",
+          "ku": "هێز"
+        },
+        "value": {
+          "en": "2000W",
+          "ar": "٢٠٠٠ واط",
+          "ku": "٢٠٠٠ وایت"
+        }
+      },
+      {
+        "label": {
+          "en": "Material",
+          "ar": "المواد",
+          "ku": "کەرەستە"
+        },
+        "value": {
+          "en": "Food-Grade Stainless Steel (SUS304)",
+          "ar": "فولاذ مقاوم للصدأ صالح للغذاء (SUS304)",
+          "ku": "ستیلی دژە ژەنگی پلەی خۆراکی (SUS304)"
+        }
+      },
+      {
+        "label": {
+          "en": "Heating Element",
+          "ar": "عنصر التسخين",
+          "ku": "بەشی گەرمکەرەوە"
+        },
+        "value": {
+          "en": "Concealed Flat Bottom",
+          "ar": "قاعدة مسطحة مخفية",
+          "ku": "بنی تەختی شاراوە"
+        }
+      },
+      {
+        "label": {
+          "en": "Base Type",
+          "ar": "نوع القاعدة",
+          "ku": "جۆری بنکە"
+        },
+        "value": {
+          "en": "360° Rotational Base",
+          "ar": "قاعدة دوارة ٣٦٠ درجة",
+          "ku": "بنکەی خولاوەی ٣٦٠ پلە"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-blender-3in1",
+    "model": "HB-7701AB",
+    "category": "Food Preparation",
+    "categoryTrans": {
+      "en": "Food Preparation",
+      "ar": "تحضير الطعام",
+      "ku": "ئامادەکردنی خۆراک"
+    },
+    "price": 50000,
+    "image": "https://www.elryan.com/img/600/600/resize/catalog/product/6/7/675aa98f657d0d0020d675f04485040-74720.jpg",
+    "name": {
+      "en": "3-in-1 Hand Blender Set",
+      "ar": "مجموعة خلاط يدوي ٣ في ١",
+      "ku": "کۆمەڵە خەڵاتەی دەستی ٣ لە ١ دا"
+    },
+    "description": {
+      "en": "The ultimate kitchen companion for pureeing, chopping, and whisking. This versatile set features a heavy-duty motor and stainless steel attachments designed for everyday meal prep.",
+      "ar": "الرفيق المثالي في المطبخ للهرس والفرم والخفق. تتميز هذه المجموعة متعددة الاستخدامات بمحرك قوي وملحقات من الفولاذ المقاوم للصدأ مصممة لتحضير الوجبات اليومية.",
+      "ku": "باشترین هاوەڵی چێشتخانە بۆ شلکردنەوە، جنین، و تێکەڵکردنی هێلکە و بابەتەکان. ئەم کۆمەڵە گشتگیرە خاوەنی مۆتۆڕێکی کارامە و بەشەکانی ستیلی دژە ژەنگە کە بۆ ئامادەکردنی خۆراکی ڕۆژانە دیزاین کراون."
+    },
+    "featured": true,
+    "specifications": [
+      {
+        "label": {
+          "en": "Power",
+          "ar": "القوة",
+          "ku": "هێز"
+        },
+        "value": {
+          "en": "600W Motor",
+          "ar": "محرك ٦٠٠ واط",
+          "ku": "مۆتۆڕی ٦٠٠ وایت"
+        }
+      },
+      {
+        "label": {
+          "en": "Attachments",
+          "ar": "الملحقات",
+          "ku": "بەشە هاوپێچەکان"
+        },
+        "value": {
+          "en": "Blending Shaft, Balloon Whisk, 500ml Chopper Bowl",
+          "ar": "ذراع خلط، خفاقة بالون، وعاء فرامة ٥٠٠ مل",
+          "ku": "داری خەڵاتە، تێکەڵکەری باڵۆنی، کاسەی جنینی ٥٠٠ مل"
+        }
+      },
+      {
+        "label": {
+          "en": "Speeds",
+          "ar": "السرعات",
+          "ku": "خێراییەکان"
+        },
+        "value": {
+          "en": "2 Speeds with Turbo",
+          "ar": "سرعتين مع وظيفة التوربو",
+          "ku": "٢ خێرایی لەگەڵ تۆربۆ"
+        }
+      },
+      {
+        "label": {
+          "en": "Blade Material",
+          "ar": "مادة الشفرة",
+          "ku": "کەرەستەی تیغ"
+        },
+        "value": {
+          "en": "Titanium-Coated Stainless Steel",
+          "ar": "فولاذ مقاوم للصدأ مطلي بالتيتانيوم",
+          "ku": "ستیلی دژە ژەنگی ڕووپۆشکراو بە تیتانیۆم"
+        }
+      },
+      {
+        "label": {
+          "en": "Beaker",
+          "ar": "الدورق",
+          "ku": "پەرداخی پێوانە"
+        },
+        "value": {
+          "en": "700ml Blending Beaker",
+          "ar": "دورق خلط ٧٠٠ مل",
+          "ku": "پەرداخی تێکەڵکردنی ٧٠٠ مل"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-mixer-hand",
+    "model": "HB-4215NG",
+    "category": "Food Preparation",
+    "categoryTrans": {
+      "en": "Food Preparation",
+      "ar": "تحضير الطعام",
+      "ku": "ئامادەکردنی خۆراک"
+    },
+    "price": 39000,
+    "image": "https://www.elryan.com/img/600/600/resize/catalog/product/6/9/69538561c8491600123f359d15084675aa-29555.png",
+    "name": {
+      "en": "Ergonomic Hand Mixer",
+      "ar": "خفاقة يدوية مريحة",
+      "ku": "عجانەی دەستی ئەرگونۆمی"
+    },
+    "description": {
+      "en": "Compact and powerful hand mixer perfect for whipping creams, kneading light doughs, and mixing cake batters. Features chrome-plated beaters and dough hooks with an easy-eject button.",
+      "ar": "خفاقة يدوية مدمجة وقوية مثالية لخفق الكريمة وعجن العجين الخفيف وخلط خليط الكيك. تتميز بخفاقات مطلية بالكروم وخطافات عجين مع زر إخراج سهل.",
+      "ku": "عجانەیەکی دەستی بچووک و بەهێز کە گونجاوە بۆ لێدانی کرێم، شێلانی هەویر، و تێکەڵکردنی کێکی شل. خاوەنی لێکدەر و قولاپەکانی هەویری ڕووپۆشکراو بە کرۆمە لەگەڵ دوگمەی دەرهێنانی ئاسان."
+    },
+    "featured": false,
+    "specifications": [
+      {
+        "label": {
+          "en": "Power Range",
+          "ar": "نطاق القوة",
+          "ku": "مەودای هێز"
+        },
+        "value": {
+          "en": "250W - 400W Peak",
+          "ar": "٢٥٠ واط - ٤٠٠ واط كحد أقصى",
+          "ku": "٢٥٠ وایت - ٤٠٠ وایت لوتکە"
+        }
+      },
+      {
+        "label": {
+          "en": "Speed Levels",
+          "ar": "مستويات السرعة",
+          "ku": "ئاستەکانی خێرایی"
+        },
+        "value": {
+          "en": "5 Speeds with Turbo",
+          "ar": "٥ سرعات مع وظيفة التوربو",
+          "ku": "٥ خێرایی لەگەڵ تۆربۆ"
+        }
+      },
+      {
+        "label": {
+          "en": "Accessories",
+          "ar": "الملحقات",
+          "ku": "پێداویستییەکان"
+        },
+        "value": {
+          "en": "2 Beaters & 2 Dough Hooks",
+          "ar": "خفاقتين وخطافين للعجين",
+          "ku": "٢ لێکدەر و ٢ قولاپ بۆ هەویر"
+        }
+      },
+      {
+        "label": {
+          "en": "Body Type",
+          "ar": "نوع الهيكل",
+          "ku": "جۆری جەستە"
+        },
+        "value": {
+          "en": "Lightweight Heat-Resistant ABS",
+          "ar": "بلاستيك ABS خفيف الوزن ومقاوم للحرارة",
+          "ku": "ABS سووکی بەرگەی گەرمی"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-coffee-grinder",
+    "model": "HB-7564AB",
+    "category": "Food Preparation",
+    "categoryTrans": {
+      "en": "Food Preparation",
+      "ar": "تحضير الطعام",
+      "ku": "ئامادەکردنی خۆراک"
+    },
+    "price": 40000,
+    "image": "https://www.elryan.com/img/600/600/resize/catalog/product/6/9/69538561c8491600123f359d33045img-36585.jpg",
+    "name": {
+      "en": "Precision Coffee Grinder",
+      "ar": "مطحنة قهوة دقيقة",
+      "ku": "ئامێری هاڕینی قاوە بە وردی"
+    },
+    "description": {
+      "en": "Freshly grind your coffee beans, spices, or nuts in seconds. This grinder offers ultra-sharp stainless steel blades and a push-down safety lid for precise control over your grind texture.",
+      "ar": "اطحن حبوب البن أو التوابل أو المكسرات الطازجة في ثوانٍ. توفر هذه المطحنة شفرات حادة جداً من الفولاذ المقاوم للصدأ وغطاء أمان يضغط للأسفل للتحكم الدقيق في درجة الطحن.",
+      "ku": "دانە قاوە، بەهارات، یان چەرەساتەکانت لە چەند چرکەیەکدا بهاڕە. ئەم ئامێرە تیغی زۆر تیژی ستیلی دژە ژەنگ و سەرپۆشێکی سەلامەتی فشاردانە خوارەوە پێشکەش دەکات بۆ کۆنترۆڵکردنی هاڕینەکە."
+    },
+    "featured": false,
+    "specifications": [
+      {
+        "label": {
+          "en": "Power Output",
+          "ar": "قوة التشغيل",
+          "ku": "هێزی دەرچوون"
+        },
+        "value": {
+          "en": "150W",
+          "ar": "١٥٠ واط",
+          "ku": "١٥٠ وایت"
+        }
+      },
+      {
+        "label": {
+          "en": "Capacity",
+          "ar": "السعة",
+          "ku": "توانای گرتن"
+        },
+        "value": {
+          "en": "50g Coffee Beans",
+          "ar": "٥٠ غرام من حبوب البن",
+          "ku": "٥٠ گرام لە دانە قاوە"
+        }
+      },
+      {
+        "label": {
+          "en": "Blade System",
+          "ar": "نظام الشفرات",
+          "ku": "سیستەمی تیغ"
+        },
+        "value": {
+          "en": "Stainless Steel Double Blades",
+          "ar": "شفرة مزدوجة من الفولاذ المقاوم للصدأ",
+          "ku": "تیغی دووانی ستیلی دژە ژەنگ"
+        }
+      },
+      {
+        "label": {
+          "en": "Safety System",
+          "ar": "نظام الأمان",
+          "ku": "سیستەمی سەلامەتی"
+        },
+        "value": {
+          "en": "Operates only when lid is locked",
+          "ar": "تعمل فقط عندما يكون الغطاء مغلقاً بإحكام",
+          "ku": "تەنها کاتێک کار دەکات کە سەرپۆشەکە قفڵ بێت"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-vacuum-wetdry",
+    "model": "HB-2095RZ",
+    "category": "Cleaning",
+    "categoryTrans": {
+      "en": "Cleaning",
+      "ar": "التنظيف",
+      "ku": "پاککردنەوە"
+    },
+    "price": 155000,
+    "image": "https://efabrik.ro/userfiles/848f3076-9cd8-4f43-8b36-8cc89f09854c/products/6109032_big.jpg",
+    "name": {
+      "en": "Heavy-Duty Wet & Dry Vacuum",
+      "ar": "مكنسة كهربائية قوية للطبخ الرطب والجاف",
+      "ku": "گسکە کارەبایی بەهێز بۆ تەڕ و وشک"
+    },
+    "description": {
+      "en": "Engineered to tackle tough liquids and dry debris alike. Featuring a large capacity metal tank and high-efficiency HEPA filtration, it is ideal for garages, large homes, and workshop cleanups.",
+      "ar": "مصممة للتعامل مع السوائل الصعبة والحطام الجاف على حد سواء. تتميز بخزان معدني ذو سعة كبيرة وفلتر HEPA عالي الكفاءة، وهي مثالية للمرآب والمنازل الكبيرة وورش العمل.",
+      "ku": "بۆ پاککردنەوەی شلەمەنییە قورسەکان و پاشماوە وشکەکان بە هەمان شێوە دروست کراوە. خاوەنی تانکی کانزایی توانای گەورە و فلتەری HEPA کارامەیە، کە زۆر گونجاوە بۆ گەراج، خانوە گەورەکان و شوێنی کار."
+    },
+    "featured": true,
+    "specifications": [
+      {
+        "label": {
+          "en": "Suction Power",
+          "ar": "قوة الشفط",
+          "ku": "هێزی مژین"
+        },
+        "value": {
+          "en": "1200W High-Efficiency Motor",
+          "ar": "محرك عالي الكفاءة بقوة ١٢٠٠ واط",
+          "ku": "مۆتۆڕی کارامەی ١٢٠٠ وایت"
+        }
+      },
+      {
+        "label": {
+          "en": "Tank Capacity",
+          "ar": "سعة الخزان",
+          "ku": "توانای تانک"
+        },
+        "value": {
+          "en": "15 Liters (Metal)",
+          "ar": "١٥ لتر (معدني)",
+          "ku": "١٥ لیتر (کانزایی)"
+        }
+      },
+      {
+        "label": {
+          "en": "Filter System",
+          "ar": "نظام الفلترة",
+          "ku": "سیستەمی فلتەر"
+        },
+        "value": {
+          "en": "Washable HEPA + Foam Filter",
+          "ar": "فلتر HEPA قابل للغسل + فلتر رغوي",
+          "ku": "فلتەری HEPA شۆردراو لەگەڵ فلتەری کەف"
+        }
+      },
+      {
+        "label": {
+          "en": "Operation",
+          "ar": "التشغيل",
+          "ku": "کارکردن"
+        },
+        "value": {
+          "en": "Dual Wet and Dry Operation",
+          "ar": "تشغيل مزدوج رطب وجاف",
+          "ku": "کارکردنی دووانەی تەڕ و وشک"
+        }
+      },
+      {
+        "label": {
+          "en": "Blower Function",
+          "ar": "وظيفة النفخ",
+          "ku": "فرمانی فووکردن"
+        },
+        "value": {
+          "en": "Integrated Rear Blower Port",
+          "ar": "منفذ نفخ خلفي متكامل",
+          "ku": "دەرچەی فووکردنی دواوەی یەکگرتوو"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-vacuum-wireless",
+    "model": "HB-2019NG",
+    "category": "Cleaning",
+    "categoryTrans": {
+      "en": "Cleaning",
+      "ar": "التنظيف",
+      "ku": "پاککردنەوە"
+    },
+    "price": 245000,
+    "image": "https://www.elryan.com/img/600/600/resize/catalog/product/6/8/680651cef15531002007bd2b529622-96469.jpg",
+    "name": {
+      "en": "Cordless Cyclone Stick Vacuum",
+      "ar": "مكنسة عمودية لاسلكية بتقنية الإعصار",
+      "ku": "گسکی کارەبایی دەستی بێ تەل"
+    },
+    "description": {
+      "en": "Experience wire-free freedom with extreme suction. This cordless vacuum features a lightweight build, dynamic LED headlight brush, and multi-cyclone filtration to trap fine dust and pet hair.",
+      "ar": "جرب الحرية اللاسلكية مع قوة شفط فائقة. تتميز هذه المكنسة اللاسلكية بهيكل خفيف الوزن وفرشاة ذات إضاءة LED أمامية وفلترة إعصارية متعددة لالتقاط الغبار الناعم وشعر الحيوانات الأليفة.",
+      "ku": "ئەزموونی ئازادی بێ تەل بکە لەگەڵ هێزی مژینی زۆر بەهێز. ئەم گسکە بێ تەلە خاوەنی پێکهاتەیەکی سووک، پانکەی LED داگیرساو بۆ شوێنە تاریکەکان، و فلتەری فرە گەردەلوولییە بۆ گرتنی تۆزی ورد و موو."
+    },
+    "featured": true,
+    "specifications": [
+      {
+        "label": {
+          "en": "Motor Type",
+          "ar": "نوع المحرك",
+          "ku": "جۆری مۆتۆڕ"
+        },
+        "value": {
+          "en": "250W Brushless DC (BLDC)",
+          "ar": "محرك تيار مستمر بدون فرش بقوة ٢٥٠ واط",
+          "ku": "٢٥٠ وایت بێ فڵچە (BLDC)"
+        }
+      },
+      {
+        "label": {
+          "en": "Suction Pressure",
+          "ar": "ضغط الشفط",
+          "ku": "فشاری مژین"
+        },
+        "value": {
+          "en": "Up to 22 kPa",
+          "ar": "يصل إلى ٢٢ كيلو باسكال",
+          "ku": "تا ٢٢ کیپی ئەی"
+        }
+      },
+      {
+        "label": {
+          "en": "Battery Run Time",
+          "ar": "وقت تشغيل البطارية",
+          "ku": "کاتی کارکردنی پاتری"
+        },
+        "value": {
+          "en": "Up to 40 Minutes",
+          "ar": "يصل إلى ٤٠ دقيقة",
+          "ku": "تا ٤٠ خولەک"
+        }
+      },
+      {
+        "label": {
+          "en": "Battery Pack",
+          "ar": "حزمة البطارية",
+          "ku": "پاتری"
+        },
+        "value": {
+          "en": "22.2V Li-ion Detachable",
+          "ar": "ليثيوم أيون ٢٢.٢ فولت قابلة للإزالة",
+          "ku": "٢٢.٢ ڤۆڵت Li-ion کە لادەبرێت"
+        }
+      },
+      {
+        "label": {
+          "en": "Dust Bin",
+          "ar": "حاوية الغبار",
+          "ku": "کاسەی تۆز"
+        },
+        "value": {
+          "en": "0.45L One-Touch Emptying",
+          "ar": "سعة ٠.٤٥ لتر تفرغ بلمسة واحدة",
+          "ku": "٠.٤٥ لیتر بە یەک لێدان بەتاڵ دەبێتەوە"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-vacuum-vertical",
+    "model": "HB-2025AB",
+    "category": "Cleaning",
+    "categoryTrans": {
+      "en": "Cleaning",
+      "ar": "التنظيف",
+      "ku": "پاککردنەوە"
+    },
+    "price": 85000,
+    "image": "https://efabrik.ro/userfiles/848f3076-9cd8-4f43-8b36-8cc89f09854c/products/20250350_big.jpg",
+    "name": {
+      "en": "2-in-1 Convertible Handheld Vacuum",
+      "ar": "مكنسة ٢ في ١ قابلة للتحويل مكنسة يدوية",
+      "ku": "گسکی دەستی و ستونی ٢ لە ١ دا"
+    },
+    "description": {
+      "en": "A super-lightweight upright vacuum that instantly converts into a handheld device. Featuring cyclonic suction and a floor nozzle designed to glide effortlessly on carpets and hard floors.",
+      "ar": "مكنسة كهربائية عمودية خفيفة الوزن للغاية تتحول فوراً إلى جهاز محمول باليد. تتميز بشفط إعصاري وفوهة أرضية مصممة للانزلاق بسهولة على السجاد والأرضيات الصلبة.",
+      "ku": "گسکێکی کارەبایی ستونی زۆر سووک کە دەستبەجێ دەگۆڕێت بۆ ئامێری دەستی. خاوەنی هێزی مژینی بەهێز و دەمی گسکە بۆ خزینی بێ کێشە لەسەر فەرش و زەویە ڕەقەکان."
+    },
+    "featured": false,
+    "specifications": [
+      {
+        "label": {
+          "en": "Power Output",
+          "ar": "قوة التشغيل",
+          "ku": "هێزی دەرچوون"
+        },
+        "value": {
+          "en": "800W",
+          "ar": "٨٠٠ واط",
+          "ku": "٨٠٠ وایت"
+        }
+      },
+      {
+        "label": {
+          "en": "Dust Capacity",
+          "ar": "سعة الغبار",
+          "ku": "توانای تۆز"
+        },
+        "value": {
+          "en": "0.5 Liter Bagless",
+          "ar": "٠.٥ لتر بدون كيس",
+          "ku": "٠.٥ لیتر بێ تورەکەی"
+        }
+      },
+      {
+        "label": {
+          "en": "Filtration",
+          "ar": "الفلترة",
+          "ku": "فلتەرکردن"
+        },
+        "value": {
+          "en": "Dual Stage Washable HEPA",
+          "ar": "فلتر HEPA قابل للغسل ثنائي المراحل",
+          "ku": "فلتەری HEPA دوو قۆناغی کە دەشۆرێت"
+        }
+      },
+      {
+        "label": {
+          "en": "Weight",
+          "ar": "الوزن",
+          "ku": "کێش"
+        },
+        "value": {
+          "en": "1.8 kg (Ultra-light)",
+          "ar": "١.٨ كغم (خفيف جداً)",
+          "ku": "١.٨ کیلۆگرام (زۆر سووک)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-iron-station",
+    "model": "HB-7925NG",
+    "category": "Laundry",
+    "categoryTrans": {
+      "en": "Laundry",
+      "ar": "العناية بالملابس",
+      "ku": "جلشۆرین و ئوتوکردن"
+    },
+    "price": 195000,
+    "image": "https://www.elryan.com/img/600/600/resize/catalog/product/6/8/6805fe4e02e0aa0021c8107a50174164-78084.jpg",
+    "name": {
+      "en": "High-Pressure Steam Ironing Station",
+      "ar": "محطة الكي بالبخار ذات الضغط العالي",
+      "ku": "ئامێری ئوتوکردنی هەڵمی بەھێز"
+    },
+    "description": {
+      "en": "Cut your ironing time in half. This professional-grade ironing station uses continuous high-pressure steam that penetrates deep into fabrics, ironing thick cottons and delicate silks with ease.",
+      "ar": "وفر نصف وقت الكي. تستخدم محطة الكي الاحترافية هذه بخاراً مستمراً عالي الضغط يخترق الأقمشة بعمق، لكيّ القطن السميك والحرير الرقيق بكل سهولة.",
+      "ku": "کاتی ئوتوکردنت بۆ نیوە کەم بکەرەوە. ئەم ئامێرە ئوتوکردنە پلە پیشەییە بەکارهێنانی هەڵمی بەردەوامی پەستانی بەرز دەکات کە قووڵ دەچێتە ناو قوماشەکانەوە، بۆ ئوتوکردنی کەتانی ئەستوور و حەریری ناسک بە ئاسانی."
+    },
+    "featured": true,
+    "specifications": [
+      {
+        "label": {
+          "en": "Power",
+          "ar": "القوة",
+          "ku": "هێز"
+        },
+        "value": {
+          "en": "3000W Max",
+          "ar": "٣٠٠٠ واط كحد أقصى",
+          "ku": "٣٠٠٠ وایت زۆرترین"
+        }
+      },
+      {
+        "label": {
+          "en": "Steam Pressure",
+          "ar": "ضغط البخار",
+          "ku": "پەستانی هەڵم"
+        },
+        "value": {
+          "en": "7.0 Bar Pressure",
+          "ar": "ضغط ٧.٠ بار",
+          "ku": "٧.٠ بار پەستان"
+        }
+      },
+      {
+        "label": {
+          "en": "Water Tank",
+          "ar": "خزان المياه",
+          "ku": "تانکی ئاو"
+        },
+        "value": {
+          "en": "1.5 Liter Removable",
+          "ar": "١.٥ لتر قابل للإزالة",
+          "ku": "١.٥ لیتر کە لادەبرێت"
+        }
+      },
+      {
+        "label": {
+          "en": "Soleplate Material",
+          "ar": "مادة قاعدة المكواة",
+          "ku": "کەرەستەی بنی ئوتو"
+        },
+        "value": {
+          "en": "Scratch-Resistant Ceramic",
+          "ar": "سيراميك مقاوم للخدش وسهل الانزلاق",
+          "ku": "سیرامیکی دژە ڕووشان بۆ خزینی ئاسان"
+        }
+      },
+      {
+        "label": {
+          "en": "Control Type",
+          "ar": "نوع التحكم",
+          "ku": "جۆری کۆنترۆڵ"
+        },
+        "value": {
+          "en": "LED Touch Control Panel",
+          "ar": "لوحة تحكم تعمل باللمس LED",
+          "ku": "تەختەی کۆنترۆڵی دەست لێدانی LED"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-iron-steam",
+    "model": "HB-7825NG",
+    "category": "Laundry",
+    "categoryTrans": {
+      "en": "Laundry",
+      "ar": "العناية بالملابس",
+      "ku": "جلشۆرین و ئوتوکردن"
+    },
+    "price": 49000,
+    "image": "https://www.elryan.com/img/600/600/resize/catalog/product/6/8/6805fe4e02e0aa0021c8107a91901181-87921.jpg",
+    "name": {
+      "en": "Digital Touch Screen Steam Iron",
+      "ar": "مكواة بخار رقمية تعمل باللمس",
+      "ku": "ئوتوی هەڵمی شاشەی دیجیتاڵی"
+    },
+    "description": {
+      "en": "Take control of your garment care with a smart touch interface. Select from 11 precise temperature settings for various fabric types. The premium titanium soleplate glides like butter.",
+      "ar": "تحكم في العناية بملابسك بواجهة لمس ذكية. اختر من بين ١١ إعداداً دقيقاً لدرجة الحرارة لمختلف أنواع الأقمشة. تنزلق قاعدة التيتانيوم الفاخرة مثل الزبدة.",
+      "ku": "کۆنترۆڵی پاراستنی جلەکانت بکە بە ڕووکاری دەست لێدانی زیرەک. لە نێوان ١١ پلەی گەرمی جیاواز بۆ قوماشی جۆراوجۆر هەڵبژێرە. بنی ئوتوی تیتانیۆمی نایاب بە ئاسانی دەخزێت."
+    },
+    "featured": false,
+    "specifications": [
+      {
+        "label": {
+          "en": "Power Output",
+          "ar": "قوة التشغيل",
+          "ku": "هێزی دەرچوون"
+        },
+        "value": {
+          "en": "3000W",
+          "ar": "٣٠٠٠ واط",
+          "ku": "٣٠٠٠ وایت"
+        }
+      },
+      {
+        "label": {
+          "en": "Soleplate",
+          "ar": "قاعدة المكواة",
+          "ku": "بنی ئوتو"
+        },
+        "value": {
+          "en": "Titanium Non-Stick Coating",
+          "ar": "طلاء تيتانيوم مانع للالتصاق",
+          "ku": "ڕووپۆشی تیتانیۆمی دژە نووسان"
+        }
+      },
+      {
+        "label": {
+          "en": "Water Capacity",
+          "ar": "سعة المياه",
+          "ku": "توانای ئاو"
+        },
+        "value": {
+          "en": "350ml",
+          "ar": "٣٥٠ مل",
+          "ku": "٣٥٠ مل"
+        }
+      },
+      {
+        "label": {
+          "en": "Temp Settings",
+          "ar": "إعدادات الحرارة",
+          "ku": "پلەکانی گەرمی"
+        },
+        "value": {
+          "en": "11 Levels with LCD Indicator",
+          "ar": "١١ مستوى مع مؤشر شاشة LCD",
+          "ku": "١١ ئاست لەگەڵ نیشاندەری LCD"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-heater-oil",
+    "model": "HB-8907NG",
+    "category": "Heating",
+    "categoryTrans": {
+      "en": "Heating",
+      "ar": "التدفئة",
+      "ku": "گەرمکردنەوە"
+    },
+    "price": 145000,
+    "image": "https://www.elryan.com/img/600/600/resize/catalog/product/6/9/69538561c8491600123f359d73263img-45029.jpg",
+    "name": {
+      "en": "9-Fin Oil-Filled Radiator Heater",
+      "ar": "مدفأة زيتية ذات ٩ زعانف تسخين",
+      "ku": "ئوتوی زەیتی گەرمکەرەوەی ٩ پەڕە"
+    },
+    "description": {
+      "en": "Quiet and efficient heat for your home. This oil-filled radiator maintains long-lasting warmth without drying out the air. Features rolling castors and heat selector settings for complete comfort.",
+      "ar": "دفء هادئ وفعال لمنزلك. تحافظ هذه المدفأة الزيتية على دفء طويل الأمد دون تجفيف الهواء. تتميز بعجلات دوارة وإعدادات تحديد الحرارة لراحة كاملة.",
+      "ku": "گەرمیەکی بێدەنگ و کارامە بۆ ماڵەکەت. ئەم گەرمکەرەوە زەیتیە بەردەوامی دەدات بە گەرمی درێژخایەن بە بێ وشککردنەوەی هەوا. خاوەنی چەرخی خولاوە و ڕێکخەری پلەی گەرمیە بۆ ئاسودەیی تەواو."
+    },
+    "featured": true,
+    "specifications": [
+      {
+        "label": {
+          "en": "Heating Power",
+          "ar": "قوة التدفئة",
+          "ku": "هێزی گەرمکردنەوە"
+        },
+        "value": {
+          "en": "2000W",
+          "ar": "٢٠٠٠ واط",
+          "ku": "٢٠٠٠ وایت"
+        }
+      },
+      {
+        "label": {
+          "en": "Fin Count",
+          "ar": "عدد الزعانف",
+          "ku": "ژمارەی پەڕەکان"
+        },
+        "value": {
+          "en": "9 Heating Fins",
+          "ar": "٩ زعانف تسخين",
+          "ku": "٩ پەڕەی گەرمکەرەوە"
+        }
+      },
+      {
+        "label": {
+          "en": "Heat Settings",
+          "ar": "إعدادات الحرارة",
+          "ku": "ئاستەکانی گەرمی"
+        },
+        "value": {
+          "en": "3 Modes (800W, 1200W, 2000W)",
+          "ar": "٣ أوضاع (٨٠٠ واط، ١٢٠٠ واط، ٢٠٠٠ واط)",
+          "ku": "٣ ئاست (٨٠٠ وایت، ١٢٠٠ وایت، ٢٠٠٠ وایت)"
+        }
+      },
+      {
+        "label": {
+          "en": "Safety Systems",
+          "ar": "أنظمة الأمان",
+          "ku": "سیستەمی سەلامەتی"
+        },
+        "value": {
+          "en": "Overheat Cut-off & Tip-over Switch",
+          "ar": "حماية من ارتفاع الحرارة ومفتاح أمان عند السقوط",
+          "ku": "بڕینی گەرمی زۆر و سویچی سەلامەتی لە کاتی کەوتندا"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-fan-tower",
+    "model": "HB-5953AB",
+    "category": "Cooling",
+    "categoryTrans": {
+      "en": "Cooling",
+      "ar": "التبريد",
+      "ku": "ساردکردنەوە"
+    },
+    "price": 95000,
+    "image": "https://www.elryan.com/img/600/600/resize/catalog/product/6/8/6805fe4e02e0aa0021c8107a96068428-35882.jpg",
+    "name": {
+      "en": "Luxury Tower Fan with Aroma Diffuser",
+      "ar": "مروحة عمودية فاخرة مع موزع عطور",
+      "ku": "مرواری ستونی لوکس لەگەڵ بڵاوکەرەوەی بۆن"
+    },
+    "description": {
+      "en": "Keep cool in style. This 105cm tall tower fan offers powerful wind speeds with whisper-quiet operation. Includes a dedicated aroma slot to disperse your favorite essential oils.",
+      "ar": "ابقَ منتعشاً بأناقة. توفر هذه المروحة العمودية بطول ١٠٥ سم سرعات رياح قوية مع تشغيل هادئ جداً. تتضمن فتحة مخصصة لنشر زيوتك العطرية المفضلة.",
+      "ku": "فێنک بە بە شێوازێکی شیک. ئەم مروارە ستونییە بە درێژی ١٠٥ سم خێرایی بای بەهێز و کارکردنی بێدەنگ پێشکەش دەکات. شوێنی تایبەتی بۆن بڵاوکردنەوەی تێدایە بۆ بڵاوکردنەوەی ڕۆنە سروشتییەکان."
+    },
+    "featured": true,
+    "specifications": [
+      {
+        "label": {
+          "en": "Fan Height",
+          "ar": "ارتفاع المروحة",
+          "ku": "بەرزی مروارەکە"
+        },
+        "value": {
+          "en": "105 cm",
+          "ar": "١٠٥ سم",
+          "ku": "١٠٥ سم"
+        }
+      },
+      {
+        "label": {
+          "en": "Power",
+          "ar": "القوة",
+          "ku": "هێز"
+        },
+        "value": {
+          "en": "55W",
+          "ar": "٥٥ واط",
+          "ku": "٥٥ وایت"
+        }
+      },
+      {
+        "label": {
+          "en": "Wind Modes",
+          "ar": "أوضاع الهواء",
+          "ku": "شێوازەکانی با"
+        },
+        "value": {
+          "en": "Normal, Natural, Sleep Modes",
+          "ar": "عادي، طبيعي، وضع النوم",
+          "ku": "ئاسایی، سروشتی، و دۆخی خەوتن"
+        }
+      },
+      {
+        "label": {
+          "en": "Aroma Diffuser",
+          "ar": "موزع العطور",
+          "ku": "بڵاوکەرەوەی بۆن"
+        },
+        "value": {
+          "en": "Integrated Aroma Pad Tray",
+          "ar": "درج مخصص لأقراص العطور متكامل",
+          "ku": "سینی یەکگرتووی بۆن بڵاوکردنەوە"
+        }
+      },
+      {
+        "label": {
+          "en": "Oscillation",
+          "ar": "الدوران",
+          "ku": "خولانەوە"
+        },
+        "value": {
+          "en": "85° Wide-Angle Oscillation",
+          "ar": "دوران بزاوية واسعة ٨٥ درجة",
+          "ku": "خولانەوەی گۆشە-فراوانی ٨٥ پلە"
+        }
+      }
+    ]
+  },
+  {
+    "id": "prod-cooler-air",
+    "model": "HB-5955AB",
+    "category": "Cooling",
+    "categoryTrans": {
+      "en": "Cooling",
+      "ar": "التبريد",
+      "ku": "ساردکردنەوە"
+    },
+    "price": 119000,
+    "image": "https://efabrik.ro/userfiles/848f3076-9cd8-4f43-8b36-8cc89f09854c/products/215335654_big.jpg",
+    "name": {
+      "en": "3-in-1 Evaporative Air Cooler",
+      "ar": "مبرد هواء تبخيري ٣ في ١",
+      "ku": "ئامێری ساردکەرەوەی هەوای ٣ لە ١ دا"
+    },
+    "description": {
+      "en": "An eco-friendly cooling solution that cools, purifies, and humidifies the ambient air. Uses water evaporation pads to lower room temperatures naturally and efficiently.",
+      "ar": "حل تبريد صديق للبيئة يبرد وينقي ويرطب الهواء المحيط. يستخدم ألواح تبخير المياه لخفض درجات حرارة الغرفة بشكل طبيعي وفعال.",
+      "ku": "چارەسەرێکی ساردکردنەوەی ژینگە-دۆستانە کە هەوا فێنک دەکاتەوە، خاوێنی دەکاتەوە و شێداری دەکات. پانێڵی تبخیری ئاو بەکاردەهێنێت بۆ کەمکردنەوەی پلەی گەرمی ژوور بە شێوەیەکی سروشتی و کارامە."
+    },
+    "featured": false,
+    "specifications": [
+      {
+        "label": {
+          "en": "Power Rating",
+          "ar": "معدل القوة",
+          "ku": "ئاستی هێز"
+        },
+        "value": {
+          "en": "65W",
+          "ar": "٦٥ واط",
+          "ku": "٦٥ وایت"
+        }
+      },
+      {
+        "label": {
+          "en": "Functions",
+          "ar": "الوظائف",
+          "ku": "فرمانەکان"
+        },
+        "value": {
+          "en": "Cooling, Humidifying, Air Purification",
+          "ar": "التبريد، الترطيب، تنقية الهواء",
+          "ku": "فێنککردنەوە، شێدارکردن، و خاوێنکردنەوەی هەوا"
+        }
+      },
+      {
+        "label": {
+          "en": "Water Tank",
+          "ar": "خزان المياه",
+          "ku": "تانکی ئاو"
+        },
+        "value": {
+          "en": "7 Liters (with Ice Packs)",
+          "ar": "٧ لتر (مع عبوات ثلج)",
+          "ku": "٧ لیتر (لەگەڵ جێڵی بەفر)"
+        }
+      },
+      {
+        "label": {
+          "en": "Wind Speeds",
+          "ar": "سرعات الهواء",
+          "ku": "خێراییەکانی با"
+        },
+        "value": {
+          "en": "3 Levels (High, Medium, Low)",
+          "ar": "٣ مستويات (عالٍ، متوسط، منخفض)",
+          "ku": "٣ ئاست (بەرز، مامناوەند، نزم)"
+        }
+      }
+    ]
+  }
+]

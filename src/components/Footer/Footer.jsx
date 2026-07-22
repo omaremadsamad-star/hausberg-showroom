@@ -11,9 +11,11 @@ import {
   FaClock
 } from "react-icons/fa";
 import { useLanguage } from "../../context/LanguageContext";
+import { useApp } from "../../context/AppContext";
 
 export default function Footer() {
   const { t, lang } = useLanguage();
+  const { settings } = useApp();
   const isRtl = lang === "ar" || lang === "ku";
   const navigate = useNavigate();
   const location = useLocation();
@@ -79,16 +81,16 @@ export default function Footer() {
           </p>
           {/* Social Icons */}
           <div className="flex gap-4">
-            <a href="#" className="p-2.5 rounded-lg bg-neutral-900 hover:bg-brand hover:text-black text-neutral-400 transition-all duration-300 border border-neutral-850 hover:border-transparent" aria-label="Facebook">
+            <a href={settings?.socials?.facebook || "#"} target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-lg bg-neutral-900 hover:bg-brand hover:text-black text-neutral-400 transition-all duration-300 border border-neutral-850 hover:border-transparent" aria-label="Facebook">
               <FaFacebookF size={14} />
             </a>
-            <a href="#" className="p-2.5 rounded-lg bg-neutral-900 hover:bg-brand hover:text-black text-neutral-400 transition-all duration-300 border border-neutral-850 hover:border-transparent" aria-label="Instagram">
+            <a href={settings?.socials?.instagram || "#"} target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-lg bg-neutral-900 hover:bg-brand hover:text-black text-neutral-400 transition-all duration-300 border border-neutral-850 hover:border-transparent" aria-label="Instagram">
               <FaInstagram size={14} />
             </a>
-            <a href="#" className="p-2.5 rounded-lg bg-neutral-900 hover:bg-brand hover:text-black text-neutral-400 transition-all duration-300 border border-neutral-850 hover:border-transparent" aria-label="Twitter">
+            <a href={settings?.socials?.twitter || "#"} target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-lg bg-neutral-900 hover:bg-brand hover:text-black text-neutral-400 transition-all duration-300 border border-neutral-850 hover:border-transparent" aria-label="Twitter">
               <FaTwitter size={14} />
             </a>
-            <a href="#" className="p-2.5 rounded-lg bg-neutral-900 hover:bg-brand hover:text-black text-neutral-400 transition-all duration-300 border border-neutral-850 hover:border-transparent" aria-label="Youtube">
+            <a href={settings?.socials?.youtube || "#"} target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-lg bg-neutral-900 hover:bg-brand hover:text-black text-neutral-400 transition-all duration-300 border border-neutral-850 hover:border-transparent" aria-label="Youtube">
               <FaYoutube size={14} />
             </a>
           </div>
@@ -137,16 +139,16 @@ export default function Footer() {
             <li className="flex items-start gap-3">
               <FaMapMarkerAlt className="text-brand mt-1 shrink-0" size={14} />
               <span className="leading-relaxed text-start">
-                {t("footerAddress")}
+                {settings?.address?.[lang] || settings?.address?.['en'] || t("footerAddress")}
               </span>
             </li>
             <li className="flex items-center gap-3">
               <FaPhoneAlt className="text-brand shrink-0" size={14} />
-              <span dir="ltr">0750 964 8944</span>
+              <span dir="ltr">{settings?.phone_number || "0750 964 8944"}</span>
             </li>
             <li className="flex items-center gap-3">
               <FaEnvelope className="text-brand shrink-0" size={14} />
-              <span dir="ltr">showroom@hausberg-appliances.com</span>
+              <span dir="ltr">{settings?.email || "showroom@hausberg-appliances.com"}</span>
             </li>
           </ul>
         </div>

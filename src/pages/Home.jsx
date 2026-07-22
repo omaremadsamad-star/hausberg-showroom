@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Hero from "../components/Hero/Hero";
 import Categories from "../components/Categories/Categories";
 import ProductGrid from "../components/ProductGrid/ProductGrid";
-import { products } from "../data/products";
 
 export default function Home() {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -24,7 +23,6 @@ export default function Home() {
 
       {/* 3. Interactive Product Grid (Search + Cards) */}
       <ProductGrid 
-        products={products} 
         activeCategory={activeCategory}
         onSelectCategory={handleSelectCategory}
       />

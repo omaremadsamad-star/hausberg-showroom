@@ -1,9 +1,11 @@
 import React from "react";
 import { FaAward, FaShieldAlt, FaLeaf, FaHistory, FaCheckCircle, FaGlobe } from "react-icons/fa";
 import { useLanguage } from "../context/LanguageContext";
+import { useApp } from "../context/AppContext";
 
 export default function About() {
   const { t, lang } = useLanguage();
+  const { settings } = useApp();
   const isRtl = lang === "ar" || lang === "ku";
 
   return (
@@ -132,7 +134,7 @@ export default function About() {
             </p>
             <div className="pt-2 text-xs text-neutral-500 font-light flex items-center gap-2">
               <FaCheckCircle className="text-brand" />
-              <span>{t("footerAddress")}</span>
+              <span>{settings?.address?.[lang] || settings?.address?.['en'] || t("footerAddress")}</span>
             </div>
           </div>
           

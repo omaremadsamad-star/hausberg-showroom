@@ -1,9 +1,11 @@
 import React from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { useLanguage } from "../../context/LanguageContext";
+import { useApp } from "../../context/AppContext";
 
 export default function Hero() {
   const { t, lang } = useLanguage();
+  const { banner } = useApp();
   const isRtl = lang === "ar" || lang === "ku";
 
   const handleScrollToProducts = () => {
@@ -22,13 +24,18 @@ export default function Hero() {
     }
   };
 
+  const bgImage = banner?.image_path || "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1920&auto=format&fit=crop";
+  const localizedTitle = banner?.title?.[lang] || banner?.title?.['en'] || "Premium Home Appliances";
+  const localizedSubtitle = banner?.subtitle?.[lang] || banner?.subtitle?.['en'] || t("heroDescription");
+  const localizedBtnText = banner?.button_text?.[lang] || banner?.button_text?.['en'] || t("heroExploreBtn");
+
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
       {/* Background image with parallax scale effect and overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 scale-105 animate-[zoom-out_20s_ease-out_infinite]"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1920&auto=format&fit=crop')`
+          backgroundImage: `url('${bgImage}')`
         }}
       />
       {/* Dark Vignette Overlays for Premium Brand Feeling */}
@@ -50,15 +57,14 @@ export default function Hero() {
 
         {/* Headline */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
-          {t("heroTitleLine1")} <br className="hidden sm:block" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-light via-brand to-brand-dark">
-            {t("heroTitleLine2")}
+            {localizedTitle}
           </span>
         </h1>
 
         {/* Company Description */}
         <p className="text-neutral-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed mb-12">
-          {t("heroDescription")}
+          {localizedSubtitle}
         </p>
 
         {/* CTA Buttons */}
@@ -67,7 +73,7 @@ export default function Hero() {
             onClick={handleScrollToProducts}
             className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand to-brand-dark text-black font-semibold rounded-lg hover:from-brand-light hover:to-brand transition-all duration-300 shadow-[0_4px_20px_rgba(212,175,55,0.25)] hover:shadow-[0_4px_30px_rgba(212,175,55,0.4)] hover:-translate-y-0.5 cursor-pointer text-center"
           >
-            {t("heroExploreBtn")}
+            {localizedBtnText}
           </button>
           <button
             onClick={() => {

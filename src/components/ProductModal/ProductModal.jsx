@@ -6,7 +6,7 @@ export default function ProductModal({ product, onClose }) {
   if (!product) return null;
 
   const { lang, t } = useLanguage();
-  const { name, model, price, image, description, specifications } = product;
+  const { name, model, price, image, description, specifications = [], has_active_discount, active_price, discount_percentage } = product;
 
   // Prevent background scroll when modal is open
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function ProductModal({ product, onClose }) {
   // Resolve translations
   const localizedName = name[lang] || name["en"];
   const localizedDesc = description[lang] || description["en"];
-  const localizedCategory = product.categoryTrans[lang] || product.categoryTrans["en"];
+  const localizedCategory = product.categoryTrans?.[lang] || product.categoryTrans?.["en"] || "";
 
   const formatPrice = (priceIqd) => {
     const formattedNumStandard = new Intl.NumberFormat("en-US").format(priceIqd);
@@ -42,7 +42,8 @@ export default function ProductModal({ product, onClose }) {
     };
   };
 
-  const prices = formatPrice(price);
+  const activePrices = formatPrice(has_active_discount ? active_price : price);
+  const originalPrices = formatPrice(price);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 overflow-y-auto">
@@ -98,12 +99,31 @@ export default function ProductModal({ product, onClose }) {
 
                 {/* Price Display */}
                 <div className="flex flex-wrap items-baseline gap-3 mb-6 pb-6 border-b border-neutral-900">
-                  <span className="text-2xl font-bold text-brand-light tracking-wide">
-                    {prices.iqd}
-                  </span>
-                  <span className="text-sm text-neutral-500">
-                    ({prices.usd})
-                  </span>
+                  {has_active_discount ? (
+                    <>
+                      <span className="text-2xl font-bold text-brand tracking-wide">
+                        {activePrices.iqd}
+                      </span>
+                      <span className="text-sm text-neutral-500 line-through">
+                        {originalPrices.iqd}
+                      </span>
+                      <span className="text-xs font-bold text-black bg-brand px-2.5 py-0.5 rounded uppercase">
+                        {discount_percentage}% {lang === "ar" ? "خصم" : lang === "ku" ? "داشکاندن" : "OFF"}
+                      </span>
+                      <span className="text-xs text-neutral-500 block w-full mt-1">
+                        ({activePrices.usd})
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-2xl font-bold text-brand-light tracking-wide">
+                        {originalPrices.iqd}
+                      </span>
+                      <span className="text-sm text-neutral-500">
+                        ({originalPrices.usd})
+                      </span>
+                    </>
+                  )}
                 </div>
 
                 {/* Description */}
