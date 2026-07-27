@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../services/api";
+import { useToast } from "../context/ToastContext";
+
 import { FaSave, FaCog, FaImage, FaSpinner } from "react-icons/fa";
 
 export default function AdminSettings() {
   const [activeTab, setActiveTab] = useState("settings"); // 'settings' or 'banner'
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+
+  // Custom Toast notification hook
+  const { showToast } = useToast();
 
   // Settings State
   const [companyName, setCompanyName] = useState("");
@@ -71,7 +74,7 @@ export default function AdminSettings() {
         setBannerBtnLink(banner.button_link);
       }
     } catch (e) {
-      setError("Failed to load settings data.");
+      showToast("Failed to load settings data.", "error");
     } finally {
       setLoading(false);
     }
@@ -84,8 +87,6 @@ export default function AdminSettings() {
   const handleSaveSettings = async (e) => {
     e.preventDefault();
     try {
-      setError("");
-      setSuccess("");
       setSaving(true);
 
       const payload = {
@@ -104,9 +105,9 @@ export default function AdminSettings() {
       };
 
       await api.updateSettings(payload);
-      setSuccess("Settings updated successfully. Front-end cache cleared.");
+      showToast("Settings updated successfully. Front-end cache cleared.", "success");
     } catch (err) {
-      setError(err.message || "Failed to update settings.");
+      showToast(err.message || "Failed to update settings.", "error");
     } finally {
       setSaving(false);
     }
@@ -115,8 +116,6 @@ export default function AdminSettings() {
   const handleSaveBanner = async (e) => {
     e.preventDefault();
     try {
-      setError("");
-      setSuccess("");
       setSaving(true);
 
       const payload = {
@@ -134,13 +133,14 @@ export default function AdminSettings() {
       };
 
       await api.updateBanner(payload);
-      setSuccess("Homepage banner updated successfully. Front-end cache cleared.");
+      showToast("Homepage banner updated successfully. Front-end cache cleared.", "success");
     } catch (err) {
-      setError(err.message || "Failed to update homepage banner.");
+      showToast(err.message || "Failed to update homepage banner.", "error");
     } finally {
       setSaving(false);
     }
   };
+
 
   if (loading) {
     return (
@@ -161,7 +161,7 @@ export default function AdminSettings() {
       {/* Tabs */}
       <div className="flex border-b border-neutral-900 text-xs uppercase font-bold tracking-wider">
         <button
-          onClick={() => { setActiveTab("settings"); setError(""); setSuccess(""); }}
+          onClick={() => setActiveTab("settings")}
           className={`px-6 py-4 border-b-2 transition-all cursor-pointer flex items-center gap-2 ${
             activeTab === "settings" ? "border-brand text-brand bg-[#0a0a0f]/20" : "border-transparent text-neutral-450 hover:text-white"
           }`}
@@ -170,7 +170,7 @@ export default function AdminSettings() {
           <span>Showroom Settings</span>
         </button>
         <button
-          onClick={() => { setActiveTab("banner"); setError(""); setSuccess(""); }}
+          onClick={() => setActiveTab("banner")}
           className={`px-6 py-4 border-b-2 transition-all cursor-pointer flex items-center gap-2 ${
             activeTab === "banner" ? "border-brand text-brand bg-[#0a0a0f]/20" : "border-transparent text-neutral-450 hover:text-white"
           }`}
@@ -180,17 +180,6 @@ export default function AdminSettings() {
         </button>
       </div>
 
-      {error && (
-        <div className="p-4 rounded-xl bg-rose-950/20 border border-rose-900/60 text-rose-455 text-xs leading-relaxed max-w-3xl">
-          {error}
-        </div>
-      )}
-
-      {success && (
-        <div className="p-4 rounded-xl bg-emerald-950/20 border border-emerald-900/60 text-emerald-455 text-xs leading-relaxed max-w-3xl">
-          {success}
-        </div>
-      )}
 
       {/* -------------------- TAB: SHOWROOM SETTINGS -------------------- */}
       {activeTab === "settings" && (

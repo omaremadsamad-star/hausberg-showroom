@@ -5,6 +5,8 @@ import Footer from "./components/Footer/Footer";
 import { LanguageProvider } from "./context/LanguageContext";
 import { AppProvider } from "./context/AppContext";
 import { AuthProvider } from "./context/AuthContext";
+import { ToastProvider } from "./context/ToastContext";
+
 
 import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
@@ -70,9 +72,12 @@ export default function App() {
     <LanguageProvider>
       <AppProvider>
         <AuthProvider>
-          <AppContent />
+          <ToastProvider>
+            <AppContent />
+          </ToastProvider>
         </AuthProvider>
       </AppProvider>
     </LanguageProvider>
   );
 }
+

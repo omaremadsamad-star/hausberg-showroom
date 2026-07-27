@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { api } from "../services/api";
+import { useToast } from "../context/ToastContext";
+import ConfirmModal from "../components/Modals/ConfirmModal";
+import EmptyState from "../components/EmptyState/EmptyState";
+
 import { FaDatabase, FaPlus, FaTrash, FaDownload, FaUpload, FaSpinner, FaHistory } from "react-icons/fa";
 
 export default function AdminBackups() {
@@ -7,8 +11,11 @@ export default function AdminBackups() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [restoring, setRestoring] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+
+  // Notifications and Modals state
+  const { showToast } = useToast();
+  const [confirmDeleteFile, setConfirmDeleteFile] = useState(null);
+  const [pendingRestoreFile, setPendingRestoreFile] = useState(null);
   
   const fileInputRef = useRef(null);
 
@@ -18,7 +25,7 @@ export default function AdminBackups() {
       const res = await api.getBackups();
       setBackups(res.data || []);
     } catch (e) {
-      setError("Failed to load backups list.");
+      showToast("Failed to load backups list.", "error");
     } finally {
       setLoading(false);
     }
@@ -30,14 +37,12 @@ export default function AdminBackups() {
 
   const handleCreateBackup = async () => {
     try {
-      setError("");
-      setSuccess("");
       setSaving(true);
       const res = await api.createBackup();
-      setSuccess(`Database SQL backup generated successfully: ${res.data.filename}`);
+      showToast(`Database SQL backup generated successfully: ${res.data.filename}`, "success");
       await fetchBackups();
     } catch (err) {
-      setError(err.message || "Failed to create database backup.");
+      showToast(err.message || "Failed to create database backup.", "error");
     } finally {
       setSaving(false);
     }
@@ -48,16 +53,21 @@ export default function AdminBackups() {
     window.location.href = `/api/admin/backups/${filename}/download`;
   };
 
-  const handleDelete = async (filename) => {
-    if (!window.confirm(`Are you sure you want to delete the backup file "${filename}"?`)) return;
+  const handleDeleteTrigger = (filename) => {
+    setConfirmDeleteFile(filename);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!confirmDeleteFile) return;
+    const filename = confirmDeleteFile;
+    setConfirmDeleteFile(null);
+
     try {
-      setError("");
-      setSuccess("");
       await api.deleteBackup(filename);
-      setSuccess(`Backup file ${filename} deleted successfully.`);
+      showToast(`Backup file ${filename} deleted successfully.`, "success");
       await fetchBackups();
     } catch (err) {
-      setError(err.message || "Failed to delete backup file.");
+      showToast(err.message || "Failed to delete backup file.", "error");
     }
   };
 
@@ -65,33 +75,35 @@ export default function AdminBackups() {
     fileInputRef.current?.click();
   };
 
-  const handleFileChange = async (e) => {
+  const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    setPendingRestoreFile(file);
+  };
 
-    if (!window.confirm(`Are you sure you want to RESTORE the database from "${file.name}"? This will overwrite the current database tables and flush all website caches!`)) {
-      e.target.value = ""; // Clear file
-      return;
-    }
+  const handleConfirmRestore = async () => {
+    if (!pendingRestoreFile) return;
+    const file = pendingRestoreFile;
+    setPendingRestoreFile(null);
 
     try {
-      setError("");
-      setSuccess("");
       setRestoring(true);
+      showToast("Starting database restoration...", "info");
 
       const formData = new FormData();
       formData.append("backup_file", file);
 
       await api.restoreBackup(formData);
-      setSuccess("Database successfully restored! All website caches have been cleared.");
+      showToast("Database successfully restored! Caches cleared.", "success");
       await fetchBackups();
     } catch (err) {
-      setError(err.message || "Failed to restore database from backup file.");
+      showToast(err.message || "Failed to restore database.", "error");
     } finally {
       setRestoring(false);
-      e.target.value = ""; // Reset file input
+      if (fileInputRef.current) fileInputRef.current.value = "";
     }
   };
+
 
   const formatBytes = (bytes) => {
     if (bytes === 0) return "0 Bytes";
@@ -140,18 +152,6 @@ export default function AdminBackups() {
         </div>
       </div>
 
-      {error && (
-        <div className="p-4 rounded-xl bg-rose-950/20 border border-rose-900/60 text-rose-455 text-xs leading-relaxed max-w-3xl">
-          {error}
-        </div>
-      )}
-
-      {success && (
-        <div className="p-4 rounded-xl bg-emerald-950/20 border border-emerald-900/60 text-emerald-455 text-xs leading-relaxed max-w-3xl">
-          {success}
-        </div>
-      )}
-
       {/* SQL Backups List Table */}
       <div className="bg-[#0a0a0f]/40 border border-neutral-900 rounded-3xl overflow-hidden shadow-xl max-w-3xl">
         <div className="bg-[#0c0c13] px-6 py-4 border-b border-neutral-900 flex items-center gap-2 text-neutral-300 text-xs font-bold uppercase tracking-wider">
@@ -163,7 +163,7 @@ export default function AdminBackups() {
           <div className="flex justify-center items-center py-24">
             <div className="w-10 h-10 border-2 border-brand/20 border-t-brand rounded-full animate-spin" />
           </div>
-        ) : (
+        ) : backups.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
@@ -175,44 +175,61 @@ export default function AdminBackups() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-neutral-900/60 text-xs text-start">
-                {backups.length > 0 ? (
-                  backups.map((bak) => (
-                    <tr key={bak.filename} className="hover:bg-neutral-900/10 transition-colors duration-200">
-                      <td className="py-4.5 px-6 font-bold text-white text-start font-mono">{bak.filename}</td>
-                      <td className="py-4.5 px-6 text-center text-neutral-300 font-semibold">{formatBytes(bak.size)}</td>
-                      <td className="py-4.5 px-6 text-center text-neutral-450">{bak.created_at}</td>
-                      <td className="py-4.5 px-6">
-                        <div className="flex justify-center gap-2">
-                          <button
-                            onClick={() => handleDownload(bak.filename)}
-                            className="p-2.5 rounded-lg border border-neutral-850 hover:border-brand/40 hover:bg-neutral-900/40 text-neutral-400 hover:text-brand transition-all duration-300 cursor-pointer"
-                            title="Download backup file"
-                          >
-                            <FaDownload size={11} />
-                          </button>
-                          <button
-                            onClick={() => handleDelete(bak.filename)}
-                            className="p-2.5 rounded-lg border border-neutral-850 hover:border-rose-900/60 hover:bg-rose-950/10 text-neutral-500 hover:text-rose-455 transition-all duration-300 cursor-pointer"
-                            title="Delete backup file"
-                          >
-                            <FaTrash size={11} />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="4" className="py-12 text-center text-neutral-500 font-light">
-                      No SQL backups generated yet. Click "Generate Backup" to save current tables.
+                {backups.map((bak) => (
+                  <tr key={bak.filename} className="hover:bg-neutral-900/10 transition-colors duration-200">
+                    <td className="py-4.5 px-6 font-bold text-white text-start font-mono">{bak.filename}</td>
+                    <td className="py-4.5 px-6 text-center text-neutral-300 font-semibold">{formatBytes(bak.size)}</td>
+                    <td className="py-4.5 px-6 text-center text-neutral-455">{bak.created_at}</td>
+                    <td className="py-4.5 px-6">
+                      <div className="flex justify-center gap-2">
+                        <button
+                          onClick={() => handleDownload(bak.filename)}
+                          className="p-2.5 rounded-lg border border-neutral-850 hover:border-brand/40 hover:bg-neutral-900/40 text-neutral-400 hover:text-brand transition-all duration-300 cursor-pointer"
+                          title="Download backup file"
+                        >
+                          <FaDownload size={11} />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteTrigger(bak.filename)}
+                          className="p-2.5 rounded-lg border border-neutral-850 hover:border-rose-900/60 hover:bg-rose-950/10 text-neutral-500 hover:text-rose-455 transition-all duration-300 cursor-pointer"
+                          title="Delete backup file"
+                        >
+                          <FaTrash size={11} />
+                        </button>
+                      </div>
                     </td>
                   </tr>
-                )}
+                ))}
               </tbody>
             </table>
           </div>
+        ) : (
+          <EmptyState
+            icon={FaHistory}
+            title="No Backups Generated"
+            description="You have not created any SQL backup dumps yet. Click 'Generate Backup' above to save the current showroom database states."
+          />
         )}
       </div>
+
+      {/* Delete Confirmation Modal */}
+      <ConfirmModal
+        isOpen={!!confirmDeleteFile}
+        title="Delete SQL Backup?"
+        message={`Are you sure you want to delete the backup file "${confirmDeleteFile}"? This database dump will be permanently lost.`}
+        onConfirm={handleConfirmDelete}
+        onCancel={() => setConfirmDeleteFile(null)}
+      />
+
+      {/* Restore Confirmation Modal */}
+      <ConfirmModal
+        isOpen={!!pendingRestoreFile}
+        title="Restore Database?"
+        message={`Warning: Restoring the database from "${pendingRestoreFile?.name}" will overwrite all current categories, products, and admin accounts. This cannot be undone!`}
+        confirmText="Restore Now"
+        onConfirm={handleConfirmRestore}
+        onCancel={() => setPendingRestoreFile(null)}
+      />
     </div>
   );
 }

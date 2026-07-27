@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../services/api";
-import { FaShieldAlt, FaHistory, FaBan, FaUnlock, FaSearch, FaSpinner } from "react-icons/fa";
+import { useToast } from "../context/ToastContext";
+import ConfirmModal from "../components/Modals/ConfirmModal";
+import EmptyState from "../components/EmptyState/EmptyState";
+
+import { FaHistory, FaBan, FaUnlock, FaSearch } from "react-icons/fa";
 
 export default function AdminSecurity({ activeTab: initialTab = "logs" }) {
   const [activeTab, setActiveTab] = useState(initialTab);
@@ -15,10 +19,11 @@ export default function AdminSecurity({ activeTab: initialTab = "logs" }) {
   // Blocked IPs State
   const [blockedIps, setBlockedIps] = useState([]);
   const [ipsLoading, setIpsLoading] = useState(true);
-
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [submitting, setSubmitting] = useState(false);
+
+  // Custom Toast & Modals State
+  const { showToast } = useToast();
+  const [confirmUnblockIp, setConfirmUnblockIp] = useState(null); // holds {id, ipAddress}
 
   const fetchLogs = async () => {
     try {
@@ -31,7 +36,7 @@ export default function AdminSecurity({ activeTab: initialTab = "logs" }) {
       setLogLastPage(res.data.last_page || 1);
     } catch (e) {
       console.error(e);
-      setError("Failed to load audit logs.");
+      showToast("Failed to load audit logs.", "error");
     } finally {
       setLogsLoading(false);
     }
@@ -44,7 +49,7 @@ export default function AdminSecurity({ activeTab: initialTab = "logs" }) {
       setBlockedIps(res.data || []);
     } catch (e) {
       console.error(e);
-      setError("Failed to load blocked IP addresses list.");
+      showToast("Failed to load blocked IP addresses list.", "error");
     } finally {
       setIpsLoading(false);
     }
@@ -64,21 +69,27 @@ export default function AdminSecurity({ activeTab: initialTab = "logs" }) {
     fetchLogs();
   };
 
-  const handleUnblock = async (id, ipAddress) => {
-    if (!window.confirm(`Unblock and whitelist the IP address ${ipAddress}?`)) return;
+  const handleUnblockTrigger = (id, ipAddress) => {
+    setConfirmUnblockIp({ id, ipAddress });
+  };
+
+  const handleConfirmUnblock = async () => {
+    if (!confirmUnblockIp) return;
+    const { id, ipAddress } = confirmUnblockIp;
+    setConfirmUnblockIp(null);
+
     try {
-      setError("");
-      setSuccess("");
       setSubmitting(true);
       await api.unblockIp(id);
-      setSuccess(`IP address ${ipAddress} unblocked successfully.`);
+      showToast(`IP address ${ipAddress} unblocked successfully.`, "success");
       await fetchBlockedIps();
     } catch (err) {
-      setError(err.message || "Failed to unblock IP address.");
+      showToast(err.message || "Failed to unblock IP address.", "error");
     } finally {
       setSubmitting(false);
     }
   };
+
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -145,7 +156,7 @@ export default function AdminSecurity({ activeTab: initialTab = "logs" }) {
               <div className="flex justify-center items-center py-24">
                 <div className="w-10 h-10 border-2 border-brand/20 border-t-brand rounded-full animate-spin" />
               </div>
-            ) : (
+            ) : logs.length > 0 ? (
               <div className="overflow-x-auto">
                 <table className="w-full border-collapse">
                   <thead>
@@ -156,28 +167,27 @@ export default function AdminSecurity({ activeTab: initialTab = "logs" }) {
                       <th className="py-4 px-6 text-center">IP Address</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-neutral-900/60 text-xs text-start">
-                    {logs.length > 0 ? (
-                      logs.map((log) => (
-                        <tr key={log.id} className="hover:bg-neutral-900/10 transition-colors duration-200">
-                          <td className="py-4 px-6 text-neutral-450">{new Date(log.created_at).toLocaleString()}</td>
-                          <td className="py-4 px-6 font-semibold text-white">
-                            {log.admin_name} <span className="text-[10px] text-neutral-500 font-light block mt-0.5">@{log.username}</span>
-                          </td>
-                          <td className="py-4 px-6 text-neutral-300 font-light leading-relaxed">{log.action}</td>
-                          <td className="py-4 px-6 text-center text-neutral-450 font-mono text-[10px]">{log.ip_address}</td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan="4" className="py-12 text-center text-neutral-500 font-light">
-                          No activity logs found.
+                  <tbody className="divide-y divide-neutral-900/60 text-xs">
+                    {logs.map((log) => (
+                      <tr key={log.id} className="hover:bg-neutral-900/10 transition-colors duration-200">
+                        <td className="py-4 px-6 text-neutral-450">{new Date(log.created_at).toLocaleString()}</td>
+                        <td className="py-4 px-6 font-semibold text-white">
+                          {log.admin_username || log.username}
+                          <span className="text-[10px] text-neutral-500 font-light block mt-0.5">{log.ip_address}</span>
                         </td>
+                        <td className="py-4 px-6 text-neutral-300 font-light leading-relaxed">{log.action}</td>
+                        <td className="py-4 px-6 text-neutral-400 text-start">{log.description}</td>
                       </tr>
-                    )}
+                    ))}
                   </tbody>
                 </table>
               </div>
+            ) : (
+              <EmptyState
+                icon={FaHistory}
+                title="No Audit Logs"
+                description="No actions or logs have been recorded in the security ledger yet."
+              />
             )}
           </div>
 
@@ -213,7 +223,7 @@ export default function AdminSecurity({ activeTab: initialTab = "logs" }) {
             <div className="flex justify-center items-center py-24">
               <div className="w-10 h-10 border-2 border-brand/20 border-t-brand rounded-full animate-spin" />
             </div>
-          ) : (
+          ) : blockedIps.length > 0 ? (
             <div className="overflow-x-auto">
               <table className="w-full border-collapse">
                 <thead>
@@ -225,42 +235,51 @@ export default function AdminSecurity({ activeTab: initialTab = "logs" }) {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-neutral-900/60 text-xs">
-                  {blockedIps.length > 0 ? (
-                    blockedIps.map((ip) => (
-                      <tr key={ip.id} className="hover:bg-neutral-900/10 transition-colors duration-200">
-                        <td className="py-4 px-6 font-bold text-white text-start font-mono text-sm">{ip.ip_address}</td>
-                        <td className="py-4 px-6 text-neutral-300 text-start font-light">{ip.reason}</td>
-                        <td className="py-4 px-6 text-center text-neutral-450">
-                          {ip.expires_at ? new Date(ip.expires_at).toLocaleString() : "Indefinite"}
-                        </td>
-                        <td className="py-4.5 px-6">
-                          <div className="flex justify-center">
-                            <button
-                              onClick={() => handleUnblock(ip.id, ip.ip_address)}
-                              disabled={submitting}
-                              className="px-4 py-2 border border-emerald-500/40 hover:bg-emerald-950/10 text-emerald-450 hover:text-emerald-400 font-extrabold text-[10px] uppercase tracking-widest rounded-xl transition-all duration-300 flex items-center gap-1.5 cursor-pointer"
-                              title="Unblock and Whitelist IP"
-                            >
-                              <FaUnlock size={10} />
-                              <span>Unblock</span>
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="4" className="py-12 text-center text-neutral-500 font-light">
-                        No blocked IP addresses.
+                  {blockedIps.map((ip) => (
+                    <tr key={ip.id} className="hover:bg-neutral-900/10 transition-colors duration-200">
+                      <td className="py-4 px-6 font-bold text-white text-start font-mono text-sm">{ip.ip_address}</td>
+                      <td className="py-4 px-6 text-neutral-300 text-start font-light">{ip.reason}</td>
+                      <td className="py-4 px-6 text-center text-neutral-455">
+                        {ip.expires_at ? new Date(ip.expires_at).toLocaleString() : "Indefinite"}
+                      </td>
+                      <td className="py-4.5 px-6">
+                        <div className="flex justify-center">
+                          <button
+                            onClick={() => handleUnblockTrigger(ip.id, ip.ip_address)}
+                            disabled={submitting}
+                            className="px-4 py-2 border border-emerald-500/40 hover:bg-emerald-950/10 text-emerald-450 hover:text-emerald-400 font-extrabold text-[10px] uppercase tracking-widest rounded-xl transition-all duration-300 flex items-center gap-1.5 cursor-pointer"
+                            title="Unblock and Whitelist IP"
+                          >
+                            <FaUnlock size={10} />
+                            <span>Unblock</span>
+                          </button>
+                        </div>
                       </td>
                     </tr>
-                  )}
+                  ))}
                 </tbody>
               </table>
             </div>
+          ) : (
+            <EmptyState
+              icon={FaBan}
+              title="No Blocked IPs"
+              description="There are no IP addresses currently banned or blocked by security policy rules."
+            />
           )}
         </div>
       )}
+
+      {/* Whitelist IP Confirmation Modal */}
+      <ConfirmModal
+        isOpen={!!confirmUnblockIp}
+        title="Whitelist IP Address?"
+        message={`Are you sure you want to unblock and whitelist the IP address "${confirmUnblockIp?.ipAddress}"? This will restore their access to all administrative routes.`}
+        confirmText="Whitelist IP"
+        isDestructive={false}
+        onConfirm={handleConfirmUnblock}
+        onCancel={() => setConfirmUnblockIp(null)}
+      />
     </div>
   );
 }

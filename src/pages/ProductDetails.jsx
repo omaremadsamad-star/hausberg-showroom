@@ -198,7 +198,7 @@ export default function ProductDetails() {
                         isSelected ? "border-brand scale-105" : "border-neutral-900 hover:border-neutral-700/60 opacity-60 hover:opacity-100"
                       }`}
                     >
-                      <img src={img.path} alt="Thumbnail" className="w-full h-full object-cover" />
+                      <img src={img.path} alt="Thumbnail" loading="lazy" className="w-full h-full object-cover" />
                     </button>
                   );
                 })}

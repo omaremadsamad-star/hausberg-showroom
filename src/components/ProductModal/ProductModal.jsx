@@ -3,18 +3,21 @@ import { FaTimes, FaGlobe } from "react-icons/fa";
 import { useLanguage } from "../../context/LanguageContext";
 
 export default function ProductModal({ product, onClose }) {
-  if (!product) return null;
-
   const { lang, t } = useLanguage();
-  const { name, model, price, image, description, specifications = [], has_active_discount, active_price, discount_percentage } = product;
 
   // Prevent background scroll when modal is open
   useEffect(() => {
+    if (!product) return;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, []);
+  }, [product]);
+
+  if (!product) return null;
+
+  const { name, model, price, image, description, specifications = [], has_active_discount, active_price, discount_percentage } = product;
+
 
   // Resolve translations
   const localizedName = name[lang] || name["en"];
@@ -74,6 +77,7 @@ export default function ProductModal({ product, onClose }) {
               <img
                 src={image}
                 alt={localizedName}
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f15] via-transparent to-transparent opacity-30" />

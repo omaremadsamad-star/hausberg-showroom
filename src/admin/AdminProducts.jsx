@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { api } from "../services/api";
+import { useToast } from "../context/ToastContext";
+import ConfirmModal from "../components/Modals/ConfirmModal";
+import EmptyState from "../components/EmptyState/EmptyState";
+
 import { 
   FaPlus, 
   FaEdit, 
   FaTrash, 
   FaUndo, 
-  FaCheck, 
   FaTimes, 
-  FaImage, 
-  FaSlidersH, 
   FaSave, 
   FaTrashAlt, 
   FaStar,
@@ -19,6 +20,7 @@ import {
   FaSearch
 } from "react-icons/fa";
 
+
 export default function AdminProducts() {
   // Navigation & Listing State
   const [products, setProducts] = useState([]);
@@ -26,7 +28,6 @@ export default function AdminProducts() {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
-  const [totalProducts, setTotalProducts] = useState(0);
 
   // Filters State
   const [filterStatus, setFilterStatus] = useState("");
@@ -44,9 +45,25 @@ export default function AdminProducts() {
   const [showEditor, setShowEditor] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editorSubTab, setEditorSubTab] = useState("core"); // 'core', 'pricing', 'images', 'specs'
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({});
   const [saving, setSaving] = useState(false);
+
+  // Custom Toast Notification hook
+  const { showToast } = useToast();
+
+  // Confirmation Modals State
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+  const [confirmForceDeleteId, setConfirmForceDeleteId] = useState(null);
+
+  // Form Field Refs for Autofocus
+  const skuRef = useRef(null);
+  const brandRef = useRef(null);
+  const modelRef = useRef(null);
+  const nameEnRef = useRef(null);
+  const nameArRef = useRef(null);
+  const nameKuRef = useRef(null);
+  const priceRef = useRef(null);
+
 
   // Core Product Fields
   const [categoryId, setCategoryId] = useState("");
@@ -85,10 +102,9 @@ export default function AdminProducts() {
         page: page
       });
       setProducts(res.data || []);
-      setTotalProducts(res.meta?.total || 0);
       setLastPage(res.meta?.last_page || 1);
     } catch (e) {
-      setError("Failed to load products list.");
+      showToast("Failed to load products list.", "error");
     } finally {
       setLoading(false);
     }
@@ -124,9 +140,6 @@ export default function AdminProducts() {
     if (selectedIds.length === 0 || !bulkAction) return;
 
     try {
-      setError("");
-      setSuccess("");
-      
       const payload = {
         ids: selectedIds,
         action: bulkAction,
@@ -134,7 +147,7 @@ export default function AdminProducts() {
 
       if (bulkAction === "apply_discount") {
         if (!bulkDiscountPrice) {
-          setError("Please specify a bulk discount price.");
+          showToast("Please specify a bulk discount price.", "error");
           return;
         }
         payload.discount_price = bulkDiscountPrice;
@@ -143,7 +156,7 @@ export default function AdminProducts() {
       }
 
       await api.bulkProductsAction(payload);
-      setSuccess("Bulk action executed successfully.");
+      showToast("Bulk action executed successfully.", "success");
       setSelectedIds([]);
       setBulkAction("");
       setBulkDiscountPrice("");
@@ -151,48 +164,57 @@ export default function AdminProducts() {
       setBulkDiscountEnd("");
       await fetchProducts();
     } catch (err) {
-      setError(err.message || "Failed to execute bulk action.");
+      showToast(err.message || "Failed to execute bulk action.", "error");
     }
   };
 
   // Delete & Restore item
-  const handleDelete = async (id) => {
-    if (!window.confirm("Move this product to Trash?")) return;
+  const handleDeleteTrigger = (id) => {
+    setConfirmDeleteId(id);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!confirmDeleteId) return;
+    const id = confirmDeleteId;
+    setConfirmDeleteId(null);
+
     try {
-      setError("");
-      setSuccess("");
       await api.deleteProduct(id);
-      setSuccess("Product moved to Trash.");
+      showToast("Product moved to Trash.", "success");
       await fetchProducts();
     } catch (err) {
-      setError(err.message);
+      showToast(err.message || "Failed to delete product.", "error");
     }
   };
 
   const handleRestore = async (id) => {
     try {
-      setError("");
-      setSuccess("");
       await api.restoreProduct(id);
-      setSuccess("Product restored successfully.");
+      showToast("Product restored successfully.", "success");
       await fetchProducts();
     } catch (err) {
-      setError(err.message);
+      showToast(err.message || "Failed to restore product.", "error");
     }
   };
 
-  const handleForceDelete = async (id) => {
-    if (!window.confirm("PERMANENTLY delete this product? This action is irreversible.")) return;
+  const handleForceDeleteTrigger = (id) => {
+    setConfirmForceDeleteId(id);
+  };
+
+  const handleConfirmForceDelete = async () => {
+    if (!confirmForceDeleteId) return;
+    const id = confirmForceDeleteId;
+    setConfirmForceDeleteId(null);
+
     try {
-      setError("");
-      setSuccess("");
       await api.forceDeleteProduct(id);
-      setSuccess("Product permanently deleted.");
+      showToast("Product permanently deleted.", "success");
       await fetchProducts();
     } catch (err) {
-      setError(err.message);
+      showToast(err.message || "Failed to delete product permanently.", "error");
     }
   };
+
 
   // Editor Actions
   const handleOpenCreate = () => {
@@ -217,16 +239,14 @@ export default function AdminProducts() {
     setDiscountEnd("");
     setSpecifications([]);
     setImages([{ image_path: "", sort_order: 0 }]); // Start with one empty slot
-    setError("");
-    setSuccess("");
+    setFieldErrors({});
     setEditorSubTab("core");
     setShowEditor(true);
   };
 
   const handleOpenEdit = async (prod) => {
     try {
-      setError("");
-      setSuccess("");
+      setFieldErrors({});
       setSaving(true);
       const res = await api.getAdminProduct(prod.id);
       const data = res.data;
@@ -273,7 +293,7 @@ export default function AdminProducts() {
       setEditorSubTab("core");
       setShowEditor(true);
     } catch (err) {
-      setError("Failed to load product details.");
+      showToast(err.message || "Failed to load product details.", "error");
     } finally {
       setSaving(false);
     }
@@ -314,8 +334,34 @@ export default function AdminProducts() {
 
   const handleSaveProduct = async (e) => {
     e.preventDefault();
-    if (!categoryId || !sku || !brand || !model || !nameEn || !nameAr || !nameKu || !price) {
-      setError("Please fill in all required fields (Category, SKU, Brand, Model, Names, Price).");
+    const errors = {};
+    if (!sku) errors.sku = "SKU code is required.";
+    if (!brand) errors.brand = "Brand name is required.";
+    if (!model) errors.model = "Model identifier is required.";
+    if (!nameEn) errors.nameEn = "English product name is required.";
+    if (!nameAr) errors.nameAr = "Arabic product name is required.";
+    if (!nameKu) errors.nameKu = "Kurdish product name is required.";
+    if (!price) errors.price = "Original price is required.";
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      showToast("Please fill in all required fields.", "error");
+
+      // Auto-switch subtabs if pricing error exists
+      if (errors.price) {
+        setEditorSubTab("pricing");
+        setTimeout(() => priceRef.current?.focus(), 50);
+      } else {
+        setEditorSubTab("core");
+        setTimeout(() => {
+          if (errors.sku) skuRef.current?.focus();
+          else if (errors.brand) brandRef.current?.focus();
+          else if (errors.model) modelRef.current?.focus();
+          else if (errors.nameEn) nameEnRef.current?.focus();
+          else if (errors.nameAr) nameArRef.current?.focus();
+          else if (errors.nameKu) nameKuRef.current?.focus();
+        }, 50);
+      }
       return;
     }
 
@@ -323,8 +369,7 @@ export default function AdminProducts() {
     const cleanedImages = images.filter(img => img.image_path.trim() !== "");
 
     try {
-      setError("");
-      setSuccess("");
+      setFieldErrors({});
       setSaving(true);
 
       const payload = {
@@ -352,20 +397,21 @@ export default function AdminProducts() {
 
       if (editingId) {
         await api.updateProduct(editingId, payload);
-        setSuccess("Product updated successfully.");
+        showToast("Product updated successfully.", "success");
       } else {
         await api.createProduct(payload);
-        setSuccess("Product created successfully.");
+        showToast("Product created successfully.", "success");
       }
 
       setShowEditor(false);
       await fetchProducts();
     } catch (err) {
-      setError(err.message || "Failed to save product.");
+      showToast(err.message || "Failed to save product.", "error");
     } finally {
       setSaving(false);
     }
   };
+
 
   const handleSelectAll = (e) => {
     if (e.target.checked) {
@@ -401,19 +447,6 @@ export default function AdminProducts() {
           </button>
         )}
       </div>
-
-      {error && (
-        <div className="p-4 rounded-xl bg-rose-950/20 border border-rose-900/60 text-rose-455 text-xs leading-relaxed">
-          {error}
-        </div>
-      )}
-
-      {success && (
-        <div className="p-4 rounded-xl bg-emerald-950/20 border border-emerald-900/60 text-emerald-450 text-xs leading-relaxed">
-          {success}
-        </div>
-      )}
-
       {/* -------------------- EDITOR SCREEN -------------------- */}
       {showEditor ? (
         <div className="bg-[#0a0a0f]/40 border border-neutral-900 rounded-3xl overflow-hidden shadow-2xl">
@@ -487,68 +520,134 @@ export default function AdminProducts() {
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-widest">SKU *</label>
                   <input
+                    ref={skuRef}
                     type="text"
                     value={sku}
-                    onChange={(e) => setSku(e.target.value)}
+                    onChange={(e) => {
+                      setSku(e.target.value);
+                      if (fieldErrors.sku) setFieldErrors(prev => ({ ...prev, sku: null }));
+                    }}
                     placeholder="e.g. HB-9005-BL"
-                    className="w-full bg-[#0f0f15] border border-neutral-850 focus:border-brand/60 rounded-xl px-4 py-3 text-xs text-neutral-200 focus:outline-none"
+                    className={`w-full bg-[#0f0f15] border rounded-xl px-4 py-3 text-xs text-neutral-200 focus:outline-none ${
+                      fieldErrors.sku ? "border-red-500/80 focus:border-red-500" : "border-neutral-850 focus:border-brand/60"
+                    }`}
                   />
+                  {fieldErrors.sku && (
+                    <span className="text-[10px] font-semibold text-red-500 tracking-wide animate-fade-in block mt-1">
+                      {fieldErrors.sku}
+                    </span>
+                  )}
                 </div>
 
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-neutral-455 uppercase tracking-widest">Brand *</label>
                   <input
+                    ref={brandRef}
                     type="text"
                     value={brand}
-                    onChange={(e) => setBrand(e.target.value)}
+                    onChange={(e) => {
+                      setBrand(e.target.value);
+                      if (fieldErrors.brand) setFieldErrors(prev => ({ ...prev, brand: null }));
+                    }}
                     placeholder="e.g. Hausberg"
-                    className="w-full bg-[#0f0f15] border border-neutral-850 focus:border-brand/60 rounded-xl px-4 py-3 text-xs text-neutral-200 focus:outline-none"
+                    className={`w-full bg-[#0f0f15] border rounded-xl px-4 py-3 text-xs text-neutral-200 focus:outline-none ${
+                      fieldErrors.brand ? "border-red-500/80 focus:border-red-500" : "border-neutral-850 focus:border-brand/60"
+                    }`}
                   />
+                  {fieldErrors.brand && (
+                    <span className="text-[10px] font-semibold text-red-500 tracking-wide animate-fade-in block mt-1">
+                      {fieldErrors.brand}
+                    </span>
+                  )}
                 </div>
 
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-neutral-455 uppercase tracking-widest">Model *</label>
                   <input
+                    ref={modelRef}
                     type="text"
                     value={model}
-                    onChange={(e) => setModel(e.target.value)}
+                    onChange={(e) => {
+                      setModel(e.target.value);
+                      if (fieldErrors.model) setFieldErrors(prev => ({ ...prev, model: null }));
+                    }}
                     placeholder="e.g. HB-9005"
-                    className="w-full bg-[#0f0f15] border border-neutral-850 focus:border-brand/60 rounded-xl px-4 py-3 text-xs text-neutral-200 focus:outline-none"
+                    className={`w-full bg-[#0f0f15] border rounded-xl px-4 py-3 text-xs text-neutral-200 focus:outline-none ${
+                      fieldErrors.model ? "border-red-500/80 focus:border-red-500" : "border-neutral-850 focus:border-brand/60"
+                    }`}
                   />
+                  {fieldErrors.model && (
+                    <span className="text-[10px] font-semibold text-red-500 tracking-wide animate-fade-in block mt-1">
+                      {fieldErrors.model}
+                    </span>
+                  )}
                 </div>
 
                 <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-neutral-900/60">
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-bold text-neutral-455 uppercase tracking-widest">Name (English) *</label>
                     <input
+                      ref={nameEnRef}
                       type="text"
                       value={nameEn}
-                      onChange={(e) => setNameEn(e.target.value)}
+                      onChange={(e) => {
+                        setNameEn(e.target.value);
+                        if (fieldErrors.nameEn) setFieldErrors(prev => ({ ...prev, nameEn: null }));
+                      }}
                       placeholder="e.g. Built-in Oven"
-                      className="w-full bg-[#0f0f15] border border-neutral-850 focus:border-brand/60 rounded-xl px-4 py-3 text-xs text-neutral-200 focus:outline-none"
+                      className={`w-full bg-[#0f0f15] border rounded-xl px-4 py-3 text-xs text-neutral-200 focus:outline-none ${
+                        fieldErrors.nameEn ? "border-red-500/80 focus:border-red-500" : "border-neutral-850 focus:border-brand/60"
+                      }`}
                     />
+                    {fieldErrors.nameEn && (
+                      <span className="text-[10px] font-semibold text-red-500 tracking-wide animate-fade-in block mt-1">
+                        {fieldErrors.nameEn}
+                      </span>
+                    )}
                   </div>
 
                   <div className="space-y-1.5" dir="rtl">
                     <label className="text-[10px] font-bold text-neutral-455 uppercase tracking-widest block text-start">الاسم (العربية) *</label>
                     <input
+                      ref={nameArRef}
                       type="text"
                       value={nameAr}
-                      onChange={(e) => setNameAr(e.target.value)}
+                      onChange={(e) => {
+                        setNameAr(e.target.value);
+                        if (fieldErrors.nameAr) setFieldErrors(prev => ({ ...prev, nameAr: null }));
+                      }}
                       placeholder="مثال: فرن بلت ان"
-                      className="w-full bg-[#0f0f15] border border-neutral-850 focus:border-brand/60 rounded-xl px-4 py-3 text-xs text-neutral-200 focus:outline-none text-start"
+                      className={`w-full bg-[#0f0f15] border rounded-xl px-4 py-3 text-xs text-neutral-200 focus:outline-none text-start ${
+                        fieldErrors.nameAr ? "border-red-500/80 focus:border-red-500" : "border-neutral-850 focus:border-brand/60"
+                      }`}
                     />
+                    {fieldErrors.nameAr && (
+                      <span className="text-[10px] font-semibold text-red-500 tracking-wide animate-fade-in block mt-1 text-start">
+                        {fieldErrors.nameAr}
+                      </span>
+                    )}
                   </div>
 
                   <div className="space-y-1.5" dir="rtl">
                     <label className="text-[10px] font-bold text-neutral-455 uppercase tracking-widest block text-start">ناو (کوردی) *</label>
                     <input
+                      ref={nameKuRef}
                       type="text"
                       value={nameKu}
-                      onChange={(e) => setNameKu(e.target.value)}
+                      onChange={(e) => {
+                        setNameKu(e.target.value);
+                        if (fieldErrors.nameKu) setFieldErrors(prev => ({ ...prev, nameKu: null }));
+                      }}
                       placeholder="وێنە: فڕنی ناوکێش"
-                      className="w-full bg-[#0f0f15] border border-neutral-850 focus:border-brand/60 rounded-xl px-4 py-3 text-xs text-neutral-200 focus:outline-none text-start"
+                      className={`w-full bg-[#0f0f15] border rounded-xl px-4 py-3 text-xs text-neutral-200 focus:outline-none text-start ${
+                        fieldErrors.nameKu ? "border-red-500/80 focus:border-red-500" : "border-neutral-850 focus:border-brand/60"
+                      }`}
                     />
+                    {fieldErrors.nameKu && (
+                      <span className="text-[10px] font-semibold text-red-500 tracking-wide animate-fade-in block mt-1 text-start">
+                        {fieldErrors.nameKu}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -642,12 +741,23 @@ export default function AdminProducts() {
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-widest">Original Price (IQD) *</label>
                     <input
+                      ref={priceRef}
                       type="number"
                       value={price}
-                      onChange={(e) => setPrice(e.target.value)}
+                      onChange={(e) => {
+                        setPrice(e.target.value);
+                        if (fieldErrors.price) setFieldErrors(prev => ({ ...prev, price: null }));
+                      }}
                       placeholder="e.g. 250000"
-                      className="w-full bg-[#0f0f15] border border-neutral-850 focus:border-brand/60 rounded-xl px-4 py-3 text-xs text-neutral-200 focus:outline-none"
+                      className={`w-full bg-[#0f0f15] border rounded-xl px-4 py-3 text-xs text-neutral-200 focus:outline-none ${
+                        fieldErrors.price ? "border-red-500/80 focus:border-red-500" : "border-neutral-850 focus:border-brand/60"
+                      }`}
                     />
+                    {fieldErrors.price && (
+                      <span className="text-[10px] font-semibold text-red-500 tracking-wide animate-fade-in block mt-1">
+                        {fieldErrors.price}
+                      </span>
+                    )}
                   </div>
 
                   <div className="space-y-1.5">
@@ -973,8 +1083,62 @@ export default function AdminProducts() {
           {/* Products Table grid */}
           <div className="bg-[#0a0a0f]/40 border border-neutral-900 rounded-3xl overflow-hidden shadow-xl">
             {loading ? (
-              <div className="flex justify-center items-center py-24">
-                <div className="w-10 h-10 border-2 border-brand/20 border-t-brand rounded-full animate-spin" />
+              <div className="overflow-x-auto">
+                <table className="w-full text-start border-collapse">
+                  <thead>
+                    <tr className="border-b border-neutral-900 text-[10px] font-bold uppercase tracking-widest text-neutral-500 text-start">
+                      <th className="py-4 px-6 text-center w-12">
+                        <input
+                          type="checkbox"
+                          disabled
+                          className="rounded text-brand opacity-30 bg-[#0f0f15] border-neutral-800 w-4 h-4 cursor-not-allowed"
+                        />
+                      </th>
+                      <th className="py-4 px-6 text-start">Image</th>
+                      <th className="py-4 px-6 text-start">SKU / Model</th>
+                      <th className="py-4 px-6 text-start">Name (English)</th>
+                      <th className="py-4 px-6 text-start">Category</th>
+                      <th className="py-4 px-6 text-start">Original Price</th>
+                      <th className="py-4 px-6 text-center">Featured</th>
+                      <th className="py-4 px-6 text-center">Status</th>
+                      <th className="py-4 px-6 text-center">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-neutral-900/60">
+                    {Array.from({ length: 5 }).map((_, idx) => (
+                      <tr key={idx}>
+                        <td className="py-4.5 px-6 text-center">
+                          <div className="w-4 h-4 rounded animate-shimmer mx-auto" />
+                        </td>
+                        <td className="py-4.5 px-6">
+                          <div className="w-12 h-10 rounded-lg animate-shimmer" />
+                        </td>
+                        <td className="py-4.5 px-6">
+                          <div className="h-4 w-20 rounded animate-shimmer mb-1.5" />
+                          <div className="h-3.5 w-16 rounded animate-shimmer" />
+                        </td>
+                        <td className="py-4.5 px-6">
+                          <div className="h-4 w-32 rounded animate-shimmer" />
+                        </td>
+                        <td className="py-4.5 px-6">
+                          <div className="h-4 w-20 rounded animate-shimmer" />
+                        </td>
+                        <td className="py-4.5 px-6">
+                          <div className="h-4 w-24 rounded animate-shimmer" />
+                        </td>
+                        <td className="py-4.5 px-6 text-center">
+                          <div className="w-12 h-4 rounded-full animate-shimmer mx-auto" />
+                        </td>
+                        <td className="py-4.5 px-6 text-center">
+                          <div className="w-16 h-4 rounded-full animate-shimmer mx-auto" />
+                        </td>
+                        <td className="py-4.5 px-6 text-center">
+                          <div className="w-16 h-8 rounded-lg animate-shimmer mx-auto" />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             ) : (
               <div className="overflow-x-auto">
@@ -1066,7 +1230,7 @@ export default function AdminProducts() {
                                     <FaUndo size={12} />
                                   </button>
                                   <button
-                                    onClick={() => handleForceDelete(prod.id)}
+                                    onClick={() => handleForceDeleteTrigger(prod.id)}
                                     className="p-2.5 rounded-lg border border-neutral-850 hover:border-red-900/80 hover:bg-red-950/10 text-neutral-500 hover:text-red-455 transition-all duration-300 cursor-pointer"
                                     title="Permanently delete"
                                   >
@@ -1077,13 +1241,13 @@ export default function AdminProducts() {
                                 <>
                                   <button
                                     onClick={() => handleOpenEdit(prod)}
-                                    className="p-2.5 rounded-lg border border-neutral-850 hover:border-brand/40 hover:bg-neutral-900/40 text-neutral-450 hover:text-brand transition-all duration-300 cursor-pointer"
+                                    className="p-2.5 rounded-lg border border-neutral-850 hover:border-brand/40 hover:bg-neutral-900/40 text-neutral-455 hover:text-brand transition-all duration-300 cursor-pointer"
                                     title="Edit product"
                                   >
                                     <FaEdit size={12} />
                                   </button>
                                   <button
-                                    onClick={() => handleDelete(prod.id)}
+                                    onClick={() => handleDeleteTrigger(prod.id)}
                                     className="p-2.5 rounded-lg border border-neutral-850 hover:border-rose-900/60 hover:bg-rose-950/10 text-neutral-450 hover:text-rose-455 transition-all duration-300 cursor-pointer"
                                     title="Move to Trash"
                                   >
@@ -1097,8 +1261,11 @@ export default function AdminProducts() {
                       ))
                     ) : (
                       <tr>
-                        <td colSpan="9" className="py-16 text-center text-neutral-500 font-light">
-                          No products found matching filters.
+                        <td colSpan="9" className="py-8">
+                          <EmptyState
+                            title="No Products Found"
+                            description="There are no products matching your selected category filters or search queries."
+                          />
                         </td>
                       </tr>
                     )}
@@ -1132,6 +1299,25 @@ export default function AdminProducts() {
           )}
         </div>
       )}
+
+      {/* Custom Soft Delete Confirmation Modal */}
+      <ConfirmModal
+        isOpen={!!confirmDeleteId}
+        title="Move Product to Trash?"
+        message="Are you sure you want to move this product to the trash directory? You can restore it later if needed."
+        onConfirm={handleConfirmDelete}
+        onCancel={() => setConfirmDeleteId(null)}
+      />
+
+      {/* Custom Force Delete Confirmation Modal */}
+      <ConfirmModal
+        isOpen={!!confirmForceDeleteId}
+        title="Permanently Delete Product?"
+        message="Are you sure you want to permanently delete this product? This action is completely irreversible and all images and specifications will be lost."
+        onConfirm={handleConfirmForceDelete}
+        onCancel={() => setConfirmForceDeleteId(null)}
+      />
     </div>
   );
 }
+

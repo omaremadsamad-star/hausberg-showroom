@@ -195,6 +195,17 @@ textarea:focus {
   word-spacing: normal !important;
 }
 
+/* Kurdish Font Override - Vazirmatn font for Kurdish language only */
+:root[lang="ku"] {
+  --font-sans: "Vazirmatn", "Tahoma", "Segoe UI", sans-serif;
+}
+
+:root[lang="ku"] *,
+:root[lang="ku"] {
+  font-family: "Vazirmatn", "Tahoma", "Segoe UI", sans-serif !important;
+}
+
+
 /* Force light weights to regular (400) in RTL to prevent fallback fonts (like Segoe UI Light) from breaking cursive text shaping */
 :root[dir="rtl"] .font-light,
 :root[dir="rtl"] .font-extralight,
@@ -486,4 +497,41 @@ nav.fixed.bg-black\/85 {
   100% {
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
   }
+}
+
+/* Toast Notifications Animation */
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+/* Shimmering Gold Skeleton Loader animation */
+@keyframes gold-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    #0a0a0f 25%,
+    rgba(212, 175, 55, 0.12) 37%,
+    #0a0a0f 63%
+  ) !important;
+  background-size: 200% 100% !important;
+  animation: gold-shimmer 1.6s infinite linear !important;
 }
