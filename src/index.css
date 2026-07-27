@@ -3,12 +3,13 @@
 @theme {
   --font-sans: "Inter", sans-serif;
   
+  /* Luxury Gold & Obsidian Dark Theme */
   --color-brand: #d4af37; /* Metallic Gold Accent */
-  --color-brand-light: #f3e5ab;
-  --color-brand-dark: #aa7c11;
-  --color-dark-bg: #07070a;
-  --color-dark-card: #0f0f15;
-  --color-dark-border: #1f1f2e;
+  --color-brand-light: #f3e5ab; /* Champagne Light */
+  --color-brand-dark: #aa7c11; /* Bronze Dark */
+  --color-dark-bg: #06070a; /* Deep Charcoal Obsidian */
+  --color-dark-card: #0f1015; /* Sleek Charcoal Card */
+  --color-dark-border: #22242e; /* Steel Border */
   
   --animate-fade-in-up: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-fade-in: fade-in 0.5s ease-out forwards;
@@ -17,10 +18,12 @@
     from {
       opacity: 0;
       transform: translateY(24px);
+      filter: blur(6px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
+      filter: blur(0);
     }
   }
   @keyframes fade-in {
@@ -35,35 +38,110 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #07070a;
+  background-color: #06070a;
 }
 
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background-color: #07070a;
+  background-color: #06070a;
   color: #f5f5f7;
+  animation: page-load 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Custom Scrollbar for premium dark theme */
+@keyframes page-load {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* Premium Card Lift, Scale & Shadow Glow Interactions */
+.group {
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.group:hover {
+  transform: translateY(-8px) scale(1.015) !important;
+  border-color: rgba(212, 175, 55, 0.45) !important;
+  box-shadow: 0 25px 50px -15px rgba(212, 175, 55, 0.3) !important;
+}
+
+/* Float animation for special/featured badges or highlights */
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Custom transitions for buttons and interactive items */
+button, a, input, select, textarea {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Glowing Pulsing Effect on Brand Buttons Hover */
+button:hover, .bg-brand:hover {
+  animation: pulse-glow 1.5s infinite alternate;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.25), 0 0 10px rgba(212, 175, 55, 0.15);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.55), 0 0 25px rgba(212, 175, 55, 0.35);
+  }
+}
+
+/* Accent Glow for active inputs */
+input:focus, select:focus, textarea:focus {
+  border-color: #d4af37 !important;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25) !important;
+}
+
+/* Shimmer metallic effect on select text badges */
+.text-brand {
+  background: linear-gradient(90deg, #d4af37, #ffeaa7, #d4af37);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shimmer 3s linear infinite;
+  display: inline-block;
+}
+
+@keyframes text-shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Custom Scrollbar for premium dark gold theme */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #07070a;
+  background: #06070a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1f1f2e;
+  background: #22242e;
   border-radius: 9999px;
-  border: 2px solid #07070a;
+  border: 2px solid #06070a;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3a3a4e;
+  background: #d4af37;
 }
 
 /* Clear default #root layout from Vite template to allow full viewport control */
@@ -107,7 +185,166 @@ textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
 textarea:-webkit-autofill:focus {
   -webkit-text-fill-color: #f5f5f7 !important;
-  -webkit-box-shadow: 0 0 0px 1000px #0f0f15 inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px #0f1015 inset !important;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+/* ==========================================
+   HAUSBERG BRAND LOGO LUXURY GOLD STYLING
+   ========================================== */
+
+/* The Brand name 'Hausberg' with gold metallic shimmer */
+.group span.text-xl.tracking-widest {
+  color: #d4af37 !important; /* Premium Gold Base */
+  background: linear-gradient(135deg, #ffeaa7 0%, #d4af37 50%, #aa7c11 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.25em !important;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.15) !important;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  background-size: 200% auto !important;
+  animation: gold-shimmer 6s linear infinite !important;
+  display: inline-block;
+}
+
+/* Expansion and glow effect on hover */
+.group:hover span.text-xl.tracking-widest {
+  letter-spacing: 0.32em !important; /* Luxuriously widens text spacing */
+  text-shadow: 0 0 15px rgba(212, 175, 55, 0.5), 0 0 30px rgba(212, 175, 55, 0.25) !important;
+  transform: scale(1.02);
+}
+
+/* The 'H' box styled as a solid gold metallic icon */
+.group div.text-xl.tracking-tight {
+  background: linear-gradient(135deg, #ffeaa7 0%, #d4af37 50%, #aa7c11 100%) !important;
+  color: #05070c !important; /* High contrast dark letter */
+  font-weight: 900 !important;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.3) !important;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Rotation and extra glow on hover */
+.group:hover div.text-xl.tracking-tight {
+  transform: rotate(6deg) scale(1.1) !important;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.7) !important;
+}
+
+@keyframes gold-shimmer {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
+
+/* ==========================================
+   ANIMATED DYNAMIC 3D PERSPECTIVE GOLD GRID
+   ========================================== */
+
+/* Dark Backdrop for the Hero Section */
+section.relative.h-screen.w-full > div.bg-cover {
+  background-image: none !important; /* Hide static background picture */
+  background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 0%, #06070a 80%) !important;
+  opacity: 0.98 !important;
+  position: absolute !important;
+  inset: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Floor Grid: Moving 3D Perspective Grid in gold traveling forward */
+section.relative.h-screen.w-full > div.bg-cover::before {
+  content: "" !important;
+  position: absolute !important;
+  width: 300vw !important;
+  height: 200vh !important;
+  bottom: -50vh !important;
+  left: -100vw !important;
+  background-image: 
+    linear-gradient(to right, rgba(212, 175, 55, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212, 175, 55, 0.1) 1px, transparent 1px) !important;
+  background-size: 80px 80px !important;
+  transform: perspective(400px) rotateX(65deg) translateY(0) !important;
+  animation: grid-travel-floor 8s linear infinite !important;
+  transform-origin: center bottom !important;
+  opacity: 0.95 !important;
+  mask-image: linear-gradient(to top, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 90%) !important;
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 90%) !important;
+}
+
+@keyframes grid-travel-floor {
+  0% {
+    transform: perspective(400px) rotateX(65deg) translateY(0) !important;
+  }
+  100% {
+    transform: perspective(400px) rotateX(65deg) translateY(80px) !important;
+  }
+}
+
+/* Ceiling Grid: Opposite moving 3D Perspective Grid to form a luxury grid tunnel */
+section.relative.h-screen.w-full > div.bg-cover::after {
+  content: "" !important;
+  position: absolute !important;
+  width: 300vw !important;
+  height: 200vh !important;
+  top: -50vh !important;
+  left: -100vw !important;
+  background-image: 
+    linear-gradient(to right, rgba(212, 175, 55, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212, 175, 55, 0.06) 1px, transparent 1px) !important;
+  background-size: 100px 100px !important;
+  transform: perspective(400px) rotateX(-65deg) translateY(0) !important;
+  animation: grid-travel-ceiling 12s linear infinite !important;
+  transform-origin: center top !important;
+  opacity: 0.75 !important;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 90%) !important;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 90%) !important;
+}
+
+@keyframes grid-travel-ceiling {
+  0% {
+    transform: perspective(400px) rotateX(-65deg) translateY(0) !important;
+  }
+  100% {
+    transform: perspective(400px) rotateX(-65deg) translateY(-100px) !important;
+  }
+}
+
+/* Seamless floating glowing golden sparkles in the 3D space */
+section.relative.h-screen.w-full::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background-image: 
+    radial-gradient(circle, rgba(212, 175, 55, 0.7) 1px, transparent 1px),
+    radial-gradient(circle, rgba(243, 229, 171, 0.9) 1.5px, transparent 1.5px),
+    radial-gradient(circle, rgba(170, 124, 17, 0.5) 1.2px, transparent 1.2px) !important;
+  background-size: 120px 120px, 180px 180px, 240px 240px !important;
+  background-position: 0 0, 50px 70px, 100px 30px !important;
+  opacity: 0.3 !important;
+  animation: float-particles-complex 25s linear infinite !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+@keyframes float-particles-complex {
+  0% { 
+    background-position: 0px 0px, 50px 70px, 100px 30px; 
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.2);
+  }
+  100% { 
+    background-position: 0px -480px, 50px -440px, 100px -480px; 
+    filter: brightness(1);
+  }
+}
+
+
+
 
