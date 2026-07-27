@@ -46,11 +46,12 @@ class PublicApiController extends Controller
             });
         }
 
-        // 2. Filter by Category
+        // 2. Filter by Category (match by slug or english name to handle React ID mappings)
         if ($request->filled('category') && $request->input('category') !== 'all') {
-            $categorySlug = $request->input('category');
-            $query->whereHas('category', function ($q) use ($categorySlug) {
-                $q->where('slug', $categorySlug);
+            $categoryParam = $request->input('category');
+            $query->whereHas('category', function ($q) use ($categoryParam) {
+                $q->where('slug', $categoryParam)
+                  ->orWhere('name_en', $categoryParam);
             });
         }
 

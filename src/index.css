@@ -2,34 +2,43 @@
 
 @theme {
   --font-sans: "Inter", sans-serif;
-  
+
   /* Luxury Gold & Obsidian Dark Theme */
-  --color-brand: #d4af37; /* Metallic Gold Accent */
-  --color-brand-light: #f3e5ab; /* Champagne Light */
-  --color-brand-dark: #aa7c11; /* Bronze Dark */
-  --color-dark-bg: #06070a; /* Deep Charcoal Obsidian */
-  --color-dark-card: #0f1015; /* Sleek Charcoal Card */
-  --color-dark-border: #22242e; /* Steel Border */
-  
+  --color-brand: #d4af37;
+  /* Metallic Gold Accent */
+  --color-brand-light: #f3e5ab;
+  /* Champagne Light */
+  --color-brand-dark: #aa7c11;
+  /* Bronze Dark */
+  --color-dark-bg: #06070a;
+  /* Deep Charcoal Obsidian */
+  --color-dark-card: #0f1015;
+  /* Sleek Charcoal Card */
+  --color-dark-border: #22242e;
+  /* Steel Border */
+
   --animate-fade-in-up: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-fade-in: fade-in 0.5s ease-out forwards;
-  
+
   @keyframes fade-in-up {
     from {
       opacity: 0;
       transform: translateY(24px);
       filter: blur(6px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
       filter: blur(0);
     }
   }
+
   @keyframes fade-in {
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }
@@ -55,6 +64,7 @@ body {
     opacity: 0;
     filter: blur(4px);
   }
+
   to {
     opacity: 1;
     filter: blur(0);
@@ -78,18 +88,31 @@ body {
 }
 
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 /* Custom transitions for buttons and interactive items */
-button, a, input, select, textarea {
+button,
+a,
+input,
+select,
+textarea {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 /* Glowing Pulsing Effect on Brand Buttons Hover */
-button:hover, .bg-brand:hover {
+button:hover,
+.bg-brand:hover {
   animation: pulse-glow 1.5s infinite alternate;
 }
 
@@ -97,13 +120,16 @@ button:hover, .bg-brand:hover {
   0% {
     box-shadow: 0 0 5px rgba(212, 175, 55, 0.25), 0 0 10px rgba(212, 175, 55, 0.15);
   }
+
   100% {
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.55), 0 0 25px rgba(212, 175, 55, 0.35);
   }
 }
 
 /* Accent Glow for active inputs */
-input:focus, select:focus, textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
   border-color: #d4af37 !important;
   box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25) !important;
 }
@@ -162,7 +188,8 @@ input:focus, select:focus, textarea:focus {
 }
 
 /* Universal selector overrides for RTL direction to force correct Kurdish/Arabic shaping and fonts */
-:root[dir="rtl"] *, :root[dir="rtl"] {
+:root[dir="rtl"] *,
+:root[dir="rtl"] {
   font-family: "Cairo", "Tahoma", "Segoe UI", sans-serif !important;
   letter-spacing: normal !important;
   word-spacing: normal !important;
@@ -195,7 +222,8 @@ textarea:-webkit-autofill:focus {
 
 /* The Brand name 'Hausberg' with gold metallic shimmer */
 .group span.text-xl.tracking-widest {
-  color: #d4af37 !important; /* Premium Gold Base */
+  color: #d4af37 !important;
+  /* Premium Gold Base */
   background: linear-gradient(135deg, #ffeaa7 0%, #d4af37 50%, #aa7c11 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
@@ -210,7 +238,8 @@ textarea:-webkit-autofill:focus {
 
 /* Expansion and glow effect on hover */
 .group:hover span.text-xl.tracking-widest {
-  letter-spacing: 0.32em !important; /* Luxuriously widens text spacing */
+  letter-spacing: 0.32em !important;
+  /* Luxuriously widens text spacing */
   text-shadow: 0 0 15px rgba(212, 175, 55, 0.5), 0 0 30px rgba(212, 175, 55, 0.25) !important;
   transform: scale(1.02);
 }
@@ -218,7 +247,8 @@ textarea:-webkit-autofill:focus {
 /* The 'H' box styled as a solid gold metallic icon */
 .group div.text-xl.tracking-tight {
   background: linear-gradient(135deg, #ffeaa7 0%, #d4af37 50%, #aa7c11 100%) !important;
-  color: #05070c !important; /* High contrast dark letter */
+  color: #05070c !important;
+  /* High contrast dark letter */
   font-weight: 900 !important;
   box-shadow: 0 0 8px rgba(212, 175, 55, 0.3) !important;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
@@ -234,9 +264,11 @@ textarea:-webkit-autofill:focus {
   0% {
     background-position: 0% center;
   }
+
   50% {
     background-position: 100% center;
   }
+
   100% {
     background-position: 0% center;
   }
@@ -247,24 +279,27 @@ textarea:-webkit-autofill:focus {
    ========================================== */
 
 /* Dark Backdrop for the Hero Section */
-section.relative.h-screen.w-full > div.bg-cover {
-  background-image: none !important; /* Hide static background picture */
-  background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 0%, #06070a 80%) !important;
-  opacity: 0.98 !important;
+section.relative.h-screen.w-full>div.bg-cover {
+  opacity: 0.70 !important;
+  /* Set to 60% opacity as requested by the user */
   position: absolute !important;
   inset: 0 !important;
   overflow: hidden !important;
 }
 
+
+
+
+
 /* Floor Grid: Moving 3D Perspective Grid in gold traveling forward */
-section.relative.h-screen.w-full > div.bg-cover::before {
+section.relative.h-screen.w-full>div.bg-cover::before {
   content: "" !important;
   position: absolute !important;
   width: 300vw !important;
   height: 200vh !important;
   bottom: -50vh !important;
   left: -100vw !important;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(212, 175, 55, 0.1) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(212, 175, 55, 0.1) 1px, transparent 1px) !important;
   background-size: 80px 80px !important;
@@ -272,28 +307,29 @@ section.relative.h-screen.w-full > div.bg-cover::before {
   animation: grid-travel-floor 8s linear infinite !important;
   transform-origin: center bottom !important;
   opacity: 0.95 !important;
-  mask-image: linear-gradient(to top, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 90%) !important;
-  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 90%) !important;
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 90%) !important;
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 @keyframes grid-travel-floor {
   0% {
     transform: perspective(400px) rotateX(65deg) translateY(0) !important;
   }
+
   100% {
     transform: perspective(400px) rotateX(65deg) translateY(80px) !important;
   }
 }
 
 /* Ceiling Grid: Opposite moving 3D Perspective Grid to form a luxury grid tunnel */
-section.relative.h-screen.w-full > div.bg-cover::after {
+section.relative.h-screen.w-full>div.bg-cover::after {
   content: "" !important;
   position: absolute !important;
   width: 300vw !important;
   height: 200vh !important;
   top: -50vh !important;
   left: -100vw !important;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(212, 175, 55, 0.06) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(212, 175, 55, 0.06) 1px, transparent 1px) !important;
   background-size: 100px 100px !important;
@@ -301,50 +337,153 @@ section.relative.h-screen.w-full > div.bg-cover::after {
   animation: grid-travel-ceiling 12s linear infinite !important;
   transform-origin: center top !important;
   opacity: 0.75 !important;
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 90%) !important;
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 90%) !important;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 90%) !important;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 90%) !important;
 }
 
 @keyframes grid-travel-ceiling {
   0% {
     transform: perspective(400px) rotateX(-65deg) translateY(0) !important;
   }
+
   100% {
     transform: perspective(400px) rotateX(-65deg) translateY(-100px) !important;
   }
 }
 
-/* Seamless floating glowing golden sparkles in the 3D space */
-section.relative.h-screen.w-full::before {
+/* ========================================================
+   MULTIPLE LAYER 3D PARALLAX DUST PARTICLES (ALL OVER SITE)
+   ======================================================== */
+
+/* Layer 1: Smallest, slow particles moving Top-Left diagonally */
+.relative.min-h-screen::before {
   content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  background-image: 
-    radial-gradient(circle, rgba(212, 175, 55, 0.7) 1px, transparent 1px),
-    radial-gradient(circle, rgba(243, 229, 171, 0.9) 1.5px, transparent 1.5px),
-    radial-gradient(circle, rgba(170, 124, 17, 0.5) 1.2px, transparent 1.2px) !important;
-  background-size: 120px 120px, 180px 180px, 240px 240px !important;
-  background-position: 0 0, 50px 70px, 100px 30px !important;
-  opacity: 0.3 !important;
-  animation: float-particles-complex 25s linear infinite !important;
+  position: fixed !important;
+  inset: -150px !important;
+  background-image: radial-gradient(circle, rgba(212, 175, 55, 0.45) 1.2px, transparent 1.2px) !important;
+  background-size: 150px 150px !important;
+  opacity: 0.25 !important;
+  animation: float-layer-1 55s linear infinite !important;
   pointer-events: none !important;
-  z-index: 2 !important;
+  z-index: 0 !important;
 }
 
-@keyframes float-particles-complex {
-  0% { 
-    background-position: 0px 0px, 50px 70px, 100px 30px; 
-    filter: brightness(1);
+@keyframes float-layer-1 {
+  0% {
+    transform: translate(0, 0) !important;
   }
-  50% {
-    filter: brightness(1.2);
-  }
-  100% { 
-    background-position: 0px -480px, 50px -440px, 100px -480px; 
-    filter: brightness(1);
+
+  100% {
+    transform: translate(-150px, -150px) !important;
   }
 }
 
+/* Layer 2: Medium particles moving Top-Right diagonally */
+.relative.min-h-screen::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: -220px !important;
+  background-image: radial-gradient(circle, rgba(243, 229, 171, 0.55) 1.8px, transparent 1.8px) !important;
+  background-size: 220px 220px !important;
+  opacity: 0.28 !important;
+  animation: float-layer-2 38s linear infinite !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
 
+@keyframes float-layer-2 {
+  0% {
+    transform: translate(0, 0) !important;
+  }
 
+  100% {
+    transform: translate(220px, -220px) !important;
+  }
+}
 
+/* Layer 3: Larger foreground particles moving Bottom-Left diagonally */
+main.min-h-screen::before {
+  content: "" !important;
+  position: fixed !important;
+  inset: -300px !important;
+  background-image: radial-gradient(circle, rgba(170, 124, 17, 0.35) 2.4px, transparent 2.4px) !important;
+  background-size: 300px 300px !important;
+  opacity: 0.22 !important;
+  animation: float-layer-3 25s linear infinite !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+@keyframes float-layer-3 {
+  0% {
+    transform: translate(0, 0) !important;
+  }
+
+  100% {
+    transform: translate(-300px, 300px) !important;
+  }
+}
+
+/* Force dark backing color and make sections semi-transparent so background particles show through */
+html,
+body,
+.relative.min-h-screen {
+  background-color: #06070a !important;
+}
+
+/* Override the opaque background in the Hero section to let particles show */
+section.relative.h-screen.w-full {
+  background-color: transparent !important;
+}
+
+#categories-section {
+  background: linear-gradient(to bottom, rgba(6, 7, 10, 0.3), rgba(15, 16, 21, 0.45)) !important;
+}
+
+#products-section {
+  background-color: transparent !important;
+}
+
+footer {
+  background-color: rgba(6, 7, 10, 0.75) !important;
+}
+
+/* ========================================================
+   GLASSMORPHIC NAVBAR & SELECTED CATEGORIES HIGHLIGHTS
+   ======================================================== */
+
+/* Glassmorphic Floating Header Navbar */
+nav.fixed {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+nav.fixed.bg-black\/85 {
+  background-color: rgba(6, 7, 10, 0.65) !important; /* Premium semi-transparent dark glass */
+  backdrop-filter: blur(16px) saturate(180%) !important; /* Strong blur */
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border-bottom-color: rgba(212, 175, 55, 0.15) !important; /* Thin metallic gold bottom line */
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Selected Category Card highlights */
+#categories-section .border-brand\/60 {
+  background-color: rgba(26, 22, 16, 0.6) !important; /* Warm gold-tinted backing */
+  border-color: rgba(212, 175, 55, 0.7) !important; /* Rich gold border */
+  box-shadow: 0 15px 35px -10px rgba(212, 175, 55, 0.25) !important; /* Glowing gold ambient shadow */
+  transform: translateY(-4px) !important;
+}
+
+/* Pulsing gold glow around the active category icon wrapper */
+#categories-section .border-brand\/60 .bg-brand {
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.45) !important;
+  animation: icon-pulse 2s infinite alternate !important;
+}
+
+@keyframes icon-pulse {
+  0% {
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+  }
+}

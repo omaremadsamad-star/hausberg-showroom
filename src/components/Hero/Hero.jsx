@@ -5,7 +5,7 @@ import { useApp } from "../../context/AppContext";
 
 export default function Hero() {
   const { t, lang } = useLanguage();
-  const { banner } = useApp();
+  const { banner, loading } = useApp();
   const isRtl = lang === "ar" || lang === "ku";
 
   const handleScrollToProducts = () => {
@@ -24,7 +24,9 @@ export default function Hero() {
     }
   };
 
-  const bgImage = banner?.image_path || "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1920&auto=format&fit=crop";
+  const bgImage = loading 
+    ? "" 
+    : (banner?.image_path || "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1920&auto=format&fit=crop");
   const localizedTitle = banner?.title?.[lang] || banner?.title?.['en'] || "Premium Home Appliances";
   const localizedSubtitle = banner?.subtitle?.[lang] || banner?.subtitle?.['en'] || t("heroDescription");
   const localizedBtnText = banner?.button_text?.[lang] || banner?.button_text?.['en'] || t("heroExploreBtn");
@@ -33,11 +35,13 @@ export default function Hero() {
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
       {/* Background image with parallax scale effect and overlay */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 scale-105 animate-[zoom-out_20s_ease-out_infinite]"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105 animate-[zoom-out_20s_ease-out_infinite] transition-opacity duration-700"
         style={{
-          backgroundImage: `url('${bgImage}')`
+          backgroundImage: bgImage ? `url('${bgImage}')` : 'none',
+          opacity: loading ? 0 : undefined
         }}
       />
+
       {/* Dark Vignette Overlays for Premium Brand Feeling */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#07070a] via-black/70 to-black/35" />
       <div className="absolute inset-0 bg-gradient-to-r from-[#07070a]/90 via-transparent to-[#07070a]/90" />
